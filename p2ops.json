@@ -1,0 +1,1240 @@
+{
+   "@targetNamespace": "urn:sap-com:document:sap:rfc:functions",
+   "documentation": {
+      "sidl": null
+   },
+   "UsingPolicy": {
+      "@required": "true"
+   },
+   "Policy": [
+      {
+         "@Id": "IF_IF_ZBC_P2OPS_READ_DATA",
+         "Session": {
+            "enableSession": "false"
+         }
+      },
+      {
+         "@Id": "OP_IF_OP_ZBCXX_P2OPS_READ_DETAILS",
+         "enableCommit": "false",
+         "enableBlocking": "true",
+         "required": "no",
+         "enableWSRM": "false"
+      }
+   ],
+   "types": {
+      "schema": {
+         "@attributeFormDefault": "qualified",
+         "@targetNamespace": "urn:sap-com:document:sap:rfc:functions",
+         "simpleType": [
+            {
+               "@name": "char1",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "1"
+                  }
+               }
+            },
+            {
+               "@name": "char10",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "10"
+                  }
+               }
+            },
+            {
+               "@name": "char100",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "100"
+                  }
+               }
+            },
+            {
+               "@name": "char1000",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "1000"
+                  }
+               }
+            },
+            {
+               "@name": "char12",
+               "restriction": {}
+            },
+            {
+               "@name": "char15",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "15"
+                  }
+               }
+            },
+            {
+               "@name": "char241",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "241"
+                  }
+               }
+            },
+            {
+               "@name": "char255",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "255"
+                  }
+               }
+            },
+            {
+               "@name": "char30",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "30"
+                  }
+               }
+            },
+            {
+               "@name": "char5",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "5"
+                  }
+               }
+            },
+            {
+               "@name": "char50",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "50"
+                  }
+               }
+            },
+            {
+               "@name": "char80",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "80"
+                  }
+               }
+            },
+            {
+               "@name": "clnt3",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "3"
+                  }
+               }
+            },
+            {
+               "@name": "cuky5",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "5"
+                  }
+               }
+            },
+            {
+               "@name": "curr15.2",
+               "restriction": {
+                  "@base": "xsd:decimal",
+                  "totalDigits": {
+                     "@value": "15"
+                  },
+                  "fractionDigits": {
+                     "@value": "2"
+                  }
+               }
+            },
+            {
+               "@name": "date10",
+               "restriction": {
+                  "@base": "xsd:string",
+                  "maxLength": {
+                     "@value": "10"
+                  },
+                  "pattern": {
+                     "@value": "\\d\\d\\d\\d-\\d\\d-\\d\\d"
+                  }
+               }
+            },
+            {
+               "@name": "decimal10.0",
+               "restriction": {
+                  "@base": "xsd:decimal",
+                  "totalDigits": {
+                     "@value": "10"
+                  },
+                  "fractionDigits": {
+                     "@value": "0"
+                  }
+               }
+            },
+            {
+               "@name": "string",
+               "restriction": {
+                  "@base": "xsd:string"
+               }
+            }
+         ],
+         "complexType": [
+            {
+               "@name": "ZTBCXX_P2OPS_DEL",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "DELIVERABLE"
+                     },
+                     {
+                        "@name": "DELIVERABLES"
+                     },
+                     {
+                        "@name": "DOC_NAME"
+                     },
+                     {
+                        "@name": "MANDATORY"
+                     },
+                     {
+                        "@name": "CALCVAR"
+                     },
+                     {
+                        "@name": "CALCDAYS"
+                     },
+                     {
+                        "@name": "TOOLTIP"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZSTCXX_P2OPS_FILTER",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "FKEY"
+                     },
+                     {
+                        "@name": "FVALUE"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZSSCXX_P2OPS_COM",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "PROJ_NOTES"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_CFG",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "ZKEY"
+                     },
+                     {
+                        "@name": "ZSUB"
+                     },
+                     {
+                        "@name": "ZVALUE"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_DOC",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "DOC_COUNT"
+                     },
+                     {
+                        "@name": "DELIVERABLES"
+                     },
+                     {
+                        "@name": "ASSIGNED_USER"
+                     },
+                     {
+                        "@name": "DUE_DATE"
+                     },
+                     {
+                        "@name": "DELIVERY_DATE"
+                     },
+                     {
+                        "@name": "LAST_CHANGED"
+                     },
+                     {
+                        "@name": "STATUS"
+                     },
+                     {
+                        "@name": "URL"
+                     },
+                     {
+                        "@name": "HISTORY"
+                     },
+                     {
+                        "@name": "MASTER_FLAG"
+                     },
+                     {
+                        "@name": "MANDATORY"
+                     },
+                     {
+                        "@name": "DOC_NAME"
+                     },
+                     {
+                        "@name": "COMPLETED"
+                     },
+                     {
+                        "@name": "TOOLTIP"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_URL",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "URL_ID"
+                     },
+                     {
+                        "@name": "URL_COUNT"
+                     },
+                     {
+                        "@name": "URL"
+                     },
+                     {
+                        "@name": "URL1"
+                     },
+                     {
+                        "@name": "URL2"
+                     },
+                     {
+                        "@name": "URL3"
+                     },
+                     {
+                        "@name": "URL4"
+                     },
+                     {
+                        "@name": "URL5"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_HDR",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "PROJECT_ID"
+                     },
+                     {
+                        "@name": "PROJ_OWNER"
+                     },
+                     {
+                        "@name": "PROJ_OWNER_NAME"
+                     },
+                     {
+                        "@name": "PROJ_TITLE"
+                     },
+                     {
+                        "@name": "PROJ_PRIOTITY"
+                     },
+                     {
+                        "@name": "START_DATE"
+                     },
+                     {
+                        "@name": "END_DATE"
+                     },
+                     {
+                        "@name": "PROJ_CAT"
+                     },
+                     {
+                        "@name": "PROJ_METHOD"
+                     },
+                     {
+                        "@name": "PROJ_DESCR"
+                     },
+                     {
+                        "@name": "LAST_CHANGE_DATE"
+                     },
+                     {
+                        "@name": "LAST_CHANGE_USER"
+                     },
+                     {
+                        "@name": "PROJ_STATUS"
+                     },
+                     {
+                        "@name": "PROJ_MANAGER"
+                     },
+                     {
+                        "@name": "PROJ_MANAGER_NAME"
+                     },
+                     {
+                        "@name": "PM_EMAIL_ID"
+                     },
+                     {
+                        "@name": "PM_SUBSTITUTE"
+                     },
+                     {
+                        "@name": "PM_SUB_EMIL_ID"
+                     },
+                     {
+                        "@name": "PROJ_REP_TYPE"
+                     },
+                     {
+                        "@name": "IT_LINE_PROJ"
+                     },
+                     {
+                        "@name": "PROJ_BASEP_START"
+                     },
+                     {
+                        "@name": "PROJ_BASEP_END"
+                     },
+                     {
+                        "@name": "PROJ_ACTUAL_START"
+                     },
+                     {
+                        "@name": "PROJ_ACTUAL_END"
+                     },
+                     {
+                        "@name": "LAST_APPR_START"
+                     },
+                     {
+                        "@name": "LAST_APPR_END"
+                     },
+                     {
+                        "@name": "PROJ_STB_DURATION"
+                     },
+                     {
+                        "@name": "PROJ_PSIF_SIGNED"
+                     },
+                     {
+                        "@name": "PROJ_RATING"
+                     },
+                     {
+                        "@name": "PROJ_NAME"
+                     },
+                     {
+                        "@name": "MAIN_DEP_SITE_COC"
+                     },
+                     {
+                        "@name": "ACCOUNT"
+                     },
+                     {
+                        "@name": "ACCOUNT_BUCKET"
+                     },
+                     {
+                        "@name": "APROVE_STATUS"
+                     },
+                     {
+                        "@name": "SERVICE_GROUP"
+                     },
+                     {
+                        "@name": "AFFECTED_USERS"
+                     },
+                     {
+                        "@name": "PROJ_FOLDER"
+                     },
+                     {
+                        "@name": "PROJ_DPROTECTION"
+                     },
+                     {
+                        "@name": "PROJ_INFO_SECU"
+                     },
+                     {
+                        "@name": "PROJ_EXPO_CNTRL"
+                     },
+                     {
+                        "@name": "PROJ_INTR_CNTRL"
+                     },
+                     {
+                        "@name": "PROJ_FIN_REPO_CBI"
+                     },
+                     {
+                        "@name": "PROJ_SERV_GRP"
+                     },
+                     {
+                        "@name": "PROJ_COST_TYPE"
+                     },
+                     {
+                        "@name": "PROJ_FI_IT_COST"
+                     },
+                     {
+                        "@name": "PROJ_PROCESS_MODEL"
+                     },
+                     {
+                        "@name": "PROJ_NOTES"
+                     },
+                     {
+                        "@name": "PROJ_CHNG_HIST"
+                     },
+                     {
+                        "@name": "PROJ_MANAGER_IFX"
+                     },
+                     {
+                        "@name": "PROJ_MANAGER_VEN"
+                     },
+                     {
+                        "@name": "PROJ_COORDINATOR"
+                     },
+                     {
+                        "@name": "PROJ_AFF_SYSTEM"
+                     },
+                     {
+                        "@name": "PROJ_AFF_SYS_COMM"
+                     },
+                     {
+                        "@name": "PROJ_ACTION"
+                     },
+                     {
+                        "@name": "PROJ_INT_EFFG"
+                     },
+                     {
+                        "@name": "PROJ_INT_EFFL"
+                     },
+                     {
+                        "@name": "PROJ_PREV_STATUS"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_ATT",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "ATTACH_COUNT"
+                     },
+                     {
+                        "@name": "URL"
+                     },
+                     {
+                        "@name": "FILE_NAME"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_EFF",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "EFF_COUNT"
+                     },
+                     {
+                        "@name": "P2OPS_PHASE"
+                     },
+                     {
+                        "@name": "P2OPS_EFF_TYPE"
+                     },
+                     {
+                        "@name": "P2OPS_EFF_SUB_TYP"
+                     },
+                     {
+                        "@name": "EFFORTS"
+                     },
+                     {
+                        "@name": "PR_RATE"
+                     },
+                     {
+                        "@name": "PR_TOTAL"
+                     },
+                     {
+                        "@name": "CHANGE_LOG"
+                     },
+                     {
+                        "@name": "IS_ONSITE"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZVTCXX_P2OPS_PRO",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_SYSTEM"
+                     },
+                     {
+                        "@name": "P2OPS_SYS_DESC"
+                     },
+                     {
+                        "@name": "P2OPS_SYS_OWNER"
+                     },
+                     {
+                        "@name": "P2OPS_SYS_BACKUP"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_PRC",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "PRC_COUNT"
+                     },
+                     {
+                        "@name": "PRICING_TYPE"
+                     },
+                     {
+                        "@name": "EFFORT"
+                     },
+                     {
+                        "@name": "RATE"
+                     },
+                     {
+                        "@name": "CURRENCY"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_PRS",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "ID"
+                     },
+                     {
+                        "@name": "SERVICE_DETAIL"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_TL",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "P2OPS_PHASE"
+                     },
+                     {
+                        "@name": "START_DATE"
+                     },
+                     {
+                        "@name": "END_DATE"
+                     },
+                     {
+                        "@name": "PROJ_STAB_PHASE"
+                     },
+                     {
+                        "@name": "PROJ_UAT_START"
+                     },
+                     {
+                        "@name": "PROJ_UAT_END"
+                     },
+                     {
+                        "@name": "PROJ_DES_START"
+                     },
+                     {
+                        "@name": "PROJ_DES_END"
+                     },
+                     {
+                        "@name": "PROJ_GO_LIVE"
+                     },
+                     {
+                        "@name": "PROJ_BPHASE_END"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_WAV",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "TITLE"
+                     },
+                     {
+                        "@name": "START_DATE"
+                     },
+                     {
+                        "@name": "END_DATE"
+                     },
+                     {
+                        "@name": "DESCRIPTION"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZTBCXX_P2OPS_SCO",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "SCOPE_ID"
+                     },
+                     {
+                        "@name": "SCOPE"
+                     },
+                     {
+                        "@name": "TYPE"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZVTCXX_P2OPS_STA",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "STATUS_KEY"
+                     },
+                     {
+                        "@name": "STATUS_VALUE"
+                     },
+                     {
+                        "@name": "EMAIL_SYST_OWNER"
+                     },
+                     {
+                        "@name": "EMAIL_ASSIGNEE"
+                     },
+                     {
+                        "@name": "EMAIL_COORD"
+                     },
+                     {
+                        "@name": "EMAIL_VENDOR"
+                     },
+                     {
+                        "@name": "EMAIL_MANAGER"
+                     },
+                     {
+                        "@name": "EMAIL_PROJ_MAN"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "ZSTCXX_P2OPS_USER",
+               "sequence": {
+                  "element": [
+                     {
+                        "@name": "MANDT"
+                     },
+                     {
+                        "@name": "P2OPS_ID"
+                     },
+                     {
+                        "@name": "P2OPS_WAVE"
+                     },
+                     {
+                        "@name": "USER_ID"
+                     },
+                     {
+                        "@name": "USER_ROLE"
+                     }
+                  ]
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_DEL",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "ZTTCXX_P2OPS_FILTER",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZSSCXX_P2OPS_COM",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_CFG",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_DOC",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_URL",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_HDR",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_ATT",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_EFF",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZVTCXX_P2OPS_PRO",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_PRC",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_PRS",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_TL",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_WAV",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZTBCXX_P2OPS_SCO",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZVTCXX_P2OPS_STA",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            },
+            {
+               "@name": "TABLE_OF_ZSTCXX_P2OPS_USER",
+               "sequence": {
+                  "element": {
+                     "@name": "item",
+                     "@minOccurs": "0",
+                     "@maxOccurs": "unbounded"
+                  }
+               }
+            }
+         ],
+         "element": [
+            {
+               "@name": "ZBCXX_P2OPS_READ_DETAILS",
+               "complexType": {
+                  "sequence": {
+                     "element": [
+                        {
+                           "@name": "DELIVERABLES",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "FILTER",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "NAVIGATION_TYPE",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "P2OPS_COMMENTS",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "P2OPS_CONFIG",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PDOC_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PDOC_URL",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJECT_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_ATTACH",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_EFFORT",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_PRD_SYSTEM",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_PRICE",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_REQ_SERVICE",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_TIMELINE",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PRO_WAVES_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PSCO_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "STATUS_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "USERID",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "USER_ROLE",
+                           "@minOccurs": "0"
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "@name": "ZBCXX_P2OPS_READ_DETAILSResponse",
+               "complexType": {
+                  "sequence": {
+                     "element": [
+                        {
+                           "@name": "DELIVERABLES",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "FILTER",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "P2OPS_COMMENTS",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "P2OPS_CONFIG",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PDOC_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PDOC_URL",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJECT_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_ATTACH",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_EFFORT",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_PRD_SYSTEM",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_PRICE",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_REQ_SERVICE",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PROJ_TIMELINE",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PRO_WAVES_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "PSCO_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "STATUS_ITAB",
+                           "@minOccurs": "0"
+                        },
+                        {
+                           "@name": "USER_ROLE",
+                           "@minOccurs": "0"
+                        }
+                     ]
+                  }
+               }
+            }
+         ]
+      }
+   },
+   "message": [
+      {
+         "@name": "ZBCXX_P2OPS_READ_DETAILS",
+         "part": {
+            "@name": "parameters",
+            "@element": "tns:ZBCXX_P2OPS_READ_DETAILS"
+         }
+      },
+      {
+         "@name": "ZBCXX_P2OPS_READ_DETAILSResponse",
+         "part": {
+            "@name": "parameter",
+            "@element": "tns:ZBCXX_P2OPS_READ_DETAILSResponse"
+         }
+      }
+   ],
+   "portType": {
+      "@name": "ZBC_P2OPS_READ_DATA",
+      "documentation": {
+         "sapdoc": {
+            "docitem": [
+               {
+                  "@docURL": "http://sapdsma2.sap.infineon.com:8007/sap/bc/esdt/docu/sd_text?sap-client=100&sd_name=ZBC_P2OPS_READ_DATA"
+               },
+               {
+                  "@applicationComponent": "BC-DWB-UTL"
+               }
+            ]
+         }
+      },
+      "Policy": {
+         "PolicyReference": {
+            "@URI": "#IF_IF_ZBC_P2OPS_READ_DATA"
+         }
+      },
+      "operation": {
+         "@name": "ZBCXX_P2OPS_READ_DETAILS",
+         "Policy": {
+            "PolicyReference": {
+               "@URI": "#OP_IF_OP_ZBCXX_P2OPS_READ_DETAILS"
+            }
+         },
+         "input": {
+            "@message": "tns:ZBCXX_P2OPS_READ_DETAILS"
+         },
+         "output": {
+            "@message": "tns:ZBCXX_P2OPS_READ_DETAILSResponse"
+         }
+      }
+   }
+}
