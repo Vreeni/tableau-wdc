@@ -9,15 +9,15 @@
             alias: "name",
             dataType: tableau.dataTypeEnum.string
 	}, {
-            id: "test",
-            alias: "Test",
+            id: "mag",
+            alias: "Mag",
             dataType: tableau.dataTypeEnum.string
      
         }];
 
         var tableSchema = {
-            id: "TestData_earthquakeFeed",
-            alias: "Earthquakes with magnitude greater than 4.5 in the last seven days",
+            id: "Test_feed",
+            alias: "Test feed",
             columns: cols
         };
 
@@ -27,16 +27,18 @@
     // Download the data
     myConnector.getData = function(table, doneCallback) {
 //$.getJSON("p2ops.json", function(json) {
-  $.getJSON("https://raw.githubusercontent.com/Vreeni/tableauwdc/master/p2ops.json", function(resp) {
+  $.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
             var feat = resp.types;
-		var featOne = feat.schema
-			var featTwo = featOne.simpleType,
+		//var featOne = feat.schema
+		//	var featTwo = featOne.simpleType,
                 tableData = [];
             // Iterate over the JSON object
-            for (var i = 0, len = featTwo.length; i < len; i++) {
+           // for (var i = 0, len = featTwo.length; i < len; i++) {
+	  for (var i = 0, len = feat.length; i < len; i++) {
                 tableData.push({
-                    "id": featTwo[i].id,
-		    "test": featTwo[i]['@name']
+                    "id": feat[i].id,
+		    "test": feat[i].mag
+		   // "test": featTwo[i]['@name']
                   
                 });
             }
