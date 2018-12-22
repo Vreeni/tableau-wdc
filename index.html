@@ -40,7 +40,7 @@
     myConnector.getData = function(table, doneCallback) {
 //$.getJSON("p2ops.json", function(json) {
   $.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
-            var feat = resp.types;
+            var feat = resp.features;
 		//var featOne = feat.schema
 		//	var featTwo = featOne.simpleType,
                 tableData = [];
