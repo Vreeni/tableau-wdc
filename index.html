@@ -77,12 +77,23 @@ $.getJSON("p2ops.json", function(json) {
 
 <body>
 
-
  <div class="container container-table">
         <div class="row vertical-center-row">
            <div class="text-center col-md-4 col-md-offset-4">
 
-
+<form id="inputForm" action="">
+  Enter URL for XML data: 
+  <br>
+  <input type="text" name="xmlUrl" size="50" />  
+  <br>
+  <div id="dragandrophandler">Or Drag & Drop Files Here</div>
+  <br>
+  Or paste XML data below
+  <br>
+  <textarea name="xmlText" rows="10" cols="70"/></textarea>
+<br>
+  <input type="submit" value="Get Data!">
+</form>
 
                  <button type = "button" id = "submitButton" class = "btn btn-success" style = "margin: 10px;">Get Test Data!</button>
             </div>
