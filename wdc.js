@@ -26,9 +26,9 @@
 
     // Download the data
     myConnector.getData = function(table, doneCallback) {
-$.getJSON("p2ops.json", function(json) {
-
-            var feat = json.types;
+//$.getJSON("p2ops.json", function(json) {
+  $.getJSON("https://raw.githubusercontent.com/Vreeni/tableauwdc/master/p2ops.json", function(resp) {
+            var feat = resp.types;
 		var featOne = feat.schema
 			var featTwo = featOne.simpleType,
                 tableData = [];
@@ -54,5 +54,11 @@ $.getJSON("p2ops.json", function(json) {
             tableau.connectionName = "Test Data: USGS Earthquake Feed"; // This will be the data source name in Tableau
             tableau.submit(); // This sends the connector object to Tableau
         });
+ $("#inputFormn").click(function() {
+            tableau.connectionName = "Test Data: USGS Earthquake Feed"; // This will be the data source name in Tableau
+            tableau.submit(); // This sends the connector object to Tableau
+        });
     });
 })();
+
+
