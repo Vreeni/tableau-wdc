@@ -2,13 +2,12 @@
 <head>
     <title>Test</title>
     <meta http-equiv="Cache-Control" content="no-store" />
-    
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>    
     <script src="https://connectors.tableau.com/libs/tableauwdc-2.3.latest.js" type="text/javascript"></script>   
-   <script type="text/javascript">
+    <script type="text/javascript">
 
 (function() {
     // Create the connector object
@@ -24,7 +23,6 @@
             id: "mag",
             alias: "Mag",
             dataType: tableau.dataTypeEnum.string
-     
         }];
 
         var tableSchema = {
@@ -36,13 +34,14 @@
         schemaCallback([tableSchema]);
     };
 
-    // Download the data
+    // Get the data from default link/file ==> tbd: get data from input Url
     myConnector.getData = function(table, doneCallback) {
-//$.getJSON("p2ops.json", function(json) {
-  $.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
-            var feat = resp.features;
-		//var featOne = feat.schema
-		//	var featTwo = featOne.simpleType,
+    // get data from file in this directory
+    //$.getJSON("p2ops.json", function(json) {
+    $.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
+            var feat = resp.features; //"features" hereby representing the name of a JSONArray within the JSONObject
+		//var featOne = feat.schema //possible to navigate further down within the tree structure of the JSONObject
+		//var featTwo = featOne.simpleType,
                 tableData = [];
             // Iterate over the JSON object
            // for (var i = 0, len = featTwo.length; i < len; i++) {
@@ -50,11 +49,9 @@
                 tableData.push({
                     "id": feat[i].id,
 		    "test": feat[i].mag
-		   // "test": featTwo[i]['@name']
-                  
+		   //"test": featTwo[i]['@name'] //['@name'] is used to excape special character such as '@' in names of keys      
                 });
             }
-
             table.appendRows(tableData);
             doneCallback();
         });
@@ -63,7 +60,7 @@
     tableau.registerConnector(myConnector);
 
 
-    // Create event listeners for when the user submits the form
+    // Create event listeners for when the user submits the input url or wants to use default test data
     $(document).ready(function() {
         $("#submitButton").click(function() {
             tableau.connectionName = "Test Data: Using default test data"; // This will be the data source name in Tableau
@@ -80,12 +77,9 @@
         });
     });
            
-})();
+   })();
 
-
-
-
-    </script>
+  </script>
 
 </head>
 
