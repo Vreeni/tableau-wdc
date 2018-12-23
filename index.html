@@ -62,18 +62,26 @@
 
     tableau.registerConnector(myConnector);
 
+
     // Create event listeners for when the user submits the form
     $(document).ready(function() {
         $("#submitButton").click(function() {
-            tableau.connectionName = "Test Data: USGS Earthquake Feed"; // This will be the data source name in Tableau
-            tableau.submit(); // This sends the connector object to Tableau
-        });
- $("#inputFormn").click(function() {
-            tableau.connectionName = "Test Data: USGS Earthquake Feed"; // This will be the data source name in Tableau
+            tableau.connectionName = "Test Data: Using default test data"; // This will be the data source name in Tableau
             tableau.submit(); // This sends the connector object to Tableau
         });
     });
+
+    $(document).ready(function() {
+        $("#submitUrl").click(function() {
+	   var dataId = document.getElementById("inputURL");
+	   tableau.connectionName = "URL: " + dataId;
+	   tableau.connectionData = dataId;
+	   tableau.submit();
+        });
+    });
+           
 })();
+
 
 
 
