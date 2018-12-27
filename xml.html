@@ -78,9 +78,9 @@ function _basicAjaxRequest1(url, successCallback){
 // try to use yql as a proxy
 function _yqlProxyAjaxRequest2(url, successCallback){
   var yqlQueryBase = "http://query.yahooapis.com/v1/public/yql?q=";
-  var query = "select * from htmlstring where url='" + url + "'";
+  var query = "select * from html where url='" + url + "'";
   var restOfQueryString = "&format=xml" ;
-  var yqlUrl = yqlQueryBase + encodeURIComponent(query) + restOfQueryString + "&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+  var yqlUrl = yqlQueryBase + encodeURIComponent(query) + restOfQueryString;
   _ajaxRequestHelper(url, successCallback, yqlUrl, _giveUpOnUrl9);
 }
 function _giveUpOnUrl9(url, successCallback) {
