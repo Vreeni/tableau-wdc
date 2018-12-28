@@ -38,6 +38,9 @@
  		dataType: "xml",
  		success: parseXML
 	});
+    };
+  tableau.registerConnector(myConnector);
+
 
 function parseXML(xml) {
   var xmlDoc = xmlToString(xml);
