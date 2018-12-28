@@ -34,29 +34,34 @@
       var xhttp = new XMLHttpRequest();
     	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-           		var xmlDoc = xml.responseXML;
-            		var tableCD = xmlDoc.getElementsByTagName("CD");
-			tableData = [];
-           		for (i = 0; i < tableCD.length; i++) { 
-               			tableDAta.push({
-                   			 "id": tableCD[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue,
-                  			  "artist": tableCD[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue
-                		});
-            		}
-
+			myFunction(this);
+           		
 			 
           	 }
 	};
         xhttp.open('GET', 'https://www.w3schools.com/xml/cd_catalog.xml', true);
 	xhttp.send();
-	    				    table.appendRows(tableData);
-
-                        doneCallback();
+	    				    
 
 	};
   
       tableau.registerConnector(myConnector);
       
+function myFunction(xml) {
+ var xmlDoc = xml.responseXML;
+      var tableCD = xmlDoc.getElementsByTagName("CD");
+	tableData = [];
+       for (i = 0; i < tableCD.length; i++) { 
+             tableDAta.push({
+                    "id": tableCD[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue,
+                    "artist": tableCD[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue
+              });
+       }
+  
+	table.appendRows(tableData);
+	 doneCallback();
+
+}
 
 	  /*  
     $.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
