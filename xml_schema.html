@@ -30,46 +30,8 @@
         schemaCallback([tableSchema]);
     };
 	
-    // Get the data from default link/file ==> tbd: get data from input Url
-    myConnector.getData = function(table, doneCallback) {
-	$.ajax({
-  		type: "GET",
-  		url: "https://www.w3schools.com/xml/cd_catalog.xml",
- 		dataType: "xml",
- 		success: parseXML
-	});
-    };
-  tableau.registerConnector(myConnector);
-
-
-function parseXML(xml) {
-  var xmlDoc = xmlToString(xml);
-  var tableCD = xmlDoc.getElementsByTagName("CD");
-  tableData = [];
-  for (i = 0; i < tableCD.length; i++) { 
-        tableDAta.push({
-               "id": tableCD[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue,
-               "artist": tableCD[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue
-        });
-  }
-  table.appendRows(tableData);
-  doneCallback();
-}
-	
- 
-function xmlToString(xmlData) { 
-  var xmlString;
-  if (window.ActiveXObject){
-    xmlString = xmlData.xml;
-  } else{
-    xmlString = (new XMLSerializer()).serializeToString(xmlData);
-  }
-  return xmlString;
-}  
-	    
-	    
-	    
-	  /*  
+// Get the data from default link/file ==> tbd: get data from input Url
+ myConnector.getData = function(table, doneCallback) {
       var xhttp = new XMLHttpRequest();
     	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -95,7 +57,7 @@ function myFunction(xml) {
   table.appendRows(tableData);
   doneCallback();
 }
-*/
+
 	  /*  
     $.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
             var feat = resp.features; //"features" hereby representing the name of a JSONArray within the JSONObject
