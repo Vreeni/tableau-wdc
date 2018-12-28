@@ -32,6 +32,8 @@
 	
 // Get the data from default link/file ==> tbd: get data from input Url
  myConnector.getData = function(table, doneCallback) {
+       const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
       var xhttp = new XMLHttpRequest();
     	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -40,7 +42,8 @@
 
           	 }
 	};
-        xhttp.open('GET', 'https://www.w3schools.com/xml/cd_catalog.xml', true);
+	
+        xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
 	xhttp.send();
 
 	};
