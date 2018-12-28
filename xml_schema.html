@@ -43,12 +43,13 @@
                   			  "artist": tableCD[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue
                 		});
             		}
+			 table.appendRows(tableData);
+                        doneCallback();
           	 }
 	};
         xhttp.open('GET', 'https://www.w3schools.com/xml/cd_catalog.xml', true);
 	xhttp.send();
-        table.appendRows(tableData);
-        doneCallback();
+
 	};
   
       tableau.registerConnector(myConnector);
