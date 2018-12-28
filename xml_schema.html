@@ -39,7 +39,9 @@
           	 }
 	};
         xhttp.open('GET', 'https://www.w3schools.com/xml/cd_catalog.xml', true);
-	xhttp.send();    				   
+	xhttp.send();
+	   doneCallback();
+
 	};
   
       tableau.registerConnector(myConnector);
@@ -55,7 +57,6 @@ function myFunction(xml) {
         });
   }
   table.appendRows(tableData);
-  doneCallback();
 }
 
 	  /*  
