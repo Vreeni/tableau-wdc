@@ -13,8 +13,8 @@
     var myConnector = tableau.makeConnector();
 	
     // Define the schema (right now is hardcoded > get dynamically?)
-    myConnector.getSchema = function(tableData) {
-      var headers = tableData.headers;
+    myConnector.getSchema = function(schemaCallback) {
+      var headers = schemaCallback.headers;
       var fieldNames = [];
       var fieldTypes = [];
       for (var fieldName in headers) {
