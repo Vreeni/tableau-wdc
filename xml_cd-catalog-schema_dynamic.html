@@ -21,7 +21,8 @@
     	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			xmlDoc = this.responseXML;
- 			var headers = xmlDoc.headers;
+			var cd = xmlDoc.getElementById("CD");
+ 			var headers = cd.headers;
        			/*var fieldNames = [];
         		var fieldTypes = [];*/
        			console.log("getting schema" + headers);
