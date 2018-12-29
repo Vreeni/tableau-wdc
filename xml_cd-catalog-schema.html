@@ -11,7 +11,7 @@
 (function() {
     // Create the connector object
     var myConnector = tableau.makeConnector();
-    // Define the schema
+    // Define the schema (right now is hardcoded > get dynamically?)
     myConnector.getSchema = function(schemaCallback) {
         var cols = [{
             id: "col1",
@@ -50,8 +50,8 @@
 		        doneCallback();
           	 }
 	};
-	
-        xhttp.open('GET', proxyurl + 'http://sapdsma2.sap.infineon.com:8007/sap/bc/srt/wsdl/flv_10002P111AD1/sdef_url/ZBC_P2OPS_READ_DATA?sap-client=100', true);
+	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
+        xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
 	xhttp.send();
 	};
       tableau.registerConnector(myConnector);
