@@ -20,10 +20,11 @@
       console.log("getting schema");
       for (var fieldName in headers) {
         if (headers.hasOwnProperty(fieldName)) {
-	  console.log("headers: ");
-          fieldNames.push(fieldName);
+	  fieldNames.push(fieldName);
           fieldTypes.push(headers[fieldName]);
         }
+	      else { console.log("no headerse"); }
+
       }
         schemaCallback(fieldNames, fieldTypes); // tell tableau about the fields and their types
     };
