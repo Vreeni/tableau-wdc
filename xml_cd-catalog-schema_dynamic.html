@@ -17,9 +17,10 @@
       var headers = schemaCallback.headers;
       var fieldNames = [];
       var fieldTypes = [];
-	    console.log("getting schema");
+      console.log("getting schema");
       for (var fieldName in headers) {
         if (headers.hasOwnProperty(fieldName)) {
+	  console.log("headers: " fieldName);
           fieldNames.push(fieldName);
           fieldTypes.push(headers[fieldName]);
         }
