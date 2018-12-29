@@ -95,6 +95,85 @@ function _xmlToTable(xmlDocument) {
   var headers = _extractHeaders(rowData);
   return {"headers":headers, "rowData":rowData};
 }
+	
+function _flattenData(xmlDocument) {
+  // first find the longest array
+  var longestArray = _findLongestArray(xmlDocument, xmlDocument);
+  if (!longestArray || longestArray.length == 0) {
+    // if no array found, just wrap the entire object blob in an array
+    longestArray = [objectBlob];
+  }
+  toRet = [];
+  for (var ii = 0; ii < longestArray.childNodes.length; ++ii) {
+    toRet[ii] = _flattenObject(longestArray.childNodes[ii]);
+  }
+  return toRet;
+}
+
+	
+function _flattenObject(xmlElt) {
+  var toRet = {};
+  if (xmlElt.attributes)
+  {
+    for (var attributeNum = 0; attributeNum < xmlElt.attributes.length; ++attributeNum) {
+      var attribute = xmlElt.attributes[attributeNum];
+      toRet[attribute.nodeName] = attribute.nodeValue;
+    }
+  }
+  
+  var children = xmlElt.childNodes;
+  if (!children || !children.length) {
+    if (xmlElt.textContent) {
+      toRet.text = xmlElt.textContent.trim();
+    }
+  } else {  
+  	for (var childNum = 0; childNum < children.length; ++childNum) {
+  	  var child = xmlElt.childNodes[childNum];
+  	  var childName = child.nodeName;
+  	  var subObj = _flattenObject(child);
+  	  for (var k in subObj) {
+  	    if (subObj.hasOwnProperty(k)) {
+  		    toRet[childName + '_' + k] = subObj[k];
+  	    }
+    	}
+  	}
+  }
+  return toRet;
+}
+// Finds the longest array that is a descendent of the given object
+function _findLongestArray(xmlElement, bestSoFar) {
+  var children = xmlElement.childNodes;
+  if (children && children.length) {
+    if (children.length > bestSoFar.childNodes.length) {
+      bestSoFar = xmlElement;
+    }
+    for (var childNum in children) {
+      var subBest = _findLongestArray(children[childNum], bestSoFar);
+      if (subBest.childNodes.length > bestSoFar.childNodes.length) {
+        bestSoFar = subBest;
+      }
+    }
+  }
+  return bestSoFar;
+}
+// Given an array of js objects, returns a map from data column name to data type
+function _extractHeaders(rowData) {
+  var toRet = {};
+  for (var row = 0; row < rowData.length; ++row) {
+    var rowLine = rowData[row];
+    for (var key in rowLine) {
+      if (rowLine.hasOwnProperty(key)) {
+        if (!(key in toRet)) {
+          toRet[key] = _determineType(rowLine[key]);
+        }
+      }
+    }
+  }
+  return toRet;
+}
+	
+	
+	
 
 	  /*  
     $.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
