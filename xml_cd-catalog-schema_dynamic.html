@@ -21,10 +21,10 @@
     	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			xmlDoc = this.responseXML;
- 			var headers = xmlDoc.headers;
+ 			/*var headers = xmlDoc.headers;
        			var fieldNames = [];
-        		var fieldTypes = [];
-       			console.log("getting schema" + headers);
+        		var fieldTypes = [];*/
+       			console.log("getting schema" );
           	 }
 	};
 	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
@@ -33,7 +33,7 @@
 	var tableSchema = {
             id: "Test_feed",
             alias: "Test feed",
-            columns: cols
+            columns: []
         };
         schemaCallback([tableSchema]);
     };
