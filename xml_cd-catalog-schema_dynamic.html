@@ -111,6 +111,32 @@ function _flattenData(xmlDocument) {
 }
 
 	
+// Given an array of js objects, returns a map from data column name to data type
+function _extractHeaders(rowData) {
+  var toRet = {};
+  for (var row = 0; row < rowData.length; ++row) {
+    var rowLine = rowData[row];
+    for (var key in rowLine) {
+      if (rowLine.hasOwnProperty(key)) {
+        if (!(key in toRet)) {
+          toRet[key] = _determineType(rowLine[key]);
+        }
+      }
+    }
+  }
+  return toRet;
+}
+	
+// Given a primitive, tries to make a guess at the data type of the input
+function _determineType(primitive) {
+  // possible types: 'float', 'date', 'datetime', 'bool', 'string', 'int'
+  if (parseInt(primitive) == primitive) return 'int';
+  if (parseFloat(primitive) == primitive) return 'float';
+  if (isFinite(new Date(primitive).getTime())) return 'datetime';
+  return 'string';
+}
+
+	
 function _flattenObject(xmlElt) {
   var toRet = {};
   if (xmlElt.attributes)
