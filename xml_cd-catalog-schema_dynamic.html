@@ -14,19 +14,26 @@
 	
     // Define the schema (right now is hardcoded > get dynamically?)
     myConnector.getSchema = function(schemaCallback) {
-      var headers = schemaCallback.headers;
-      var fieldNames = [];
-      var fieldTypes = [];
-      console.log("getting schema" + headers);
-      for (var fieldName in headers) {
-        if (headers.hasOwnProperty(fieldName)) {
-	  fieldNames.push(fieldName);
-          fieldTypes.push(headers[fieldName]);
-        }
+      _retrieveXmlData(function(tableData){
+        var headers = tableData.headers;
+        var fieldNames = [];
+        var fieldTypes = [];
+        console.log("getting schema: " + headers);
+        for (var fieldName in headers) {
+          if (headers.hasOwnProperty(fieldName)) {
+	    fieldNames.push(fieldName);
+            fieldTypes.push(headers[fieldName]);
+          }
 
-      }
+        }
+	 var tableSchema = {
+            id: "Test_feed",
+            alias: "Test feed",
+            columns: fieldNames, fieldTypes
+        };
         schemaCallback(fieldNames, fieldTypes); // tell tableau about the fields and their types
-    };
+      });
+    }
 	
 // Get the data from default link/file ==> tbd: get data from input Url
  myConnector.getData = function(table, doneCallback) {
@@ -69,7 +76,7 @@ function myFunction(xml) {
 	
 function _retrieveXmlData(retrieveDataCallback) {
    if (!window.cachedTableData) {
-      const proxyurl = "http://cors-anywhere.herokuapp.com/";
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
       var xhttp = new XMLHttpRequest();
     	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
