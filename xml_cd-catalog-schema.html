@@ -42,8 +42,8 @@
   			tableData = [];
   			for (i = 0; i < tableCD.length; i++) { 
         			tableData.push({
-               				"id": tableCD[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue,
-               				"artist": tableCD[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue
+               				"col1": tableCD[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue,
+               				"col2": tableCD[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue
        				});
   			}
   			table.appendRows(tableData);
