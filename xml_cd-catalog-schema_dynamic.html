@@ -11,8 +11,6 @@
 (function() {
     // Create the connector object
     var myConnector = tableau.makeConnector();
-    var xmlDoc;    
-	
 	
     // Define the schema (right now is hardcoded > get dynamically?)
     myConnector.getSchema = function(schemaCallback) {
@@ -20,23 +18,25 @@
         var xhttp = new XMLHttpRequest();
     	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			xmlDoc = this.responseXML;
+			var xmlDoc = this.responseXML;
 			var cd = xmlDoc.getElementById("CD");
  			var headers = cd.headers;
-       			/*var fieldNames = [];
-        		var fieldTypes = [];*/
+       			var fieldNames = [];
+        		var fieldTypes = [];
        			console.log("getting schema" + headers);
+			var tableSchema = {
+           			id: "Test_feed",
+           			alias: "Test feed",
+          			columns: []
+        		};
+			schemaCallback([tableSchema]);
+
           	 }
 	};
 	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
         xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
 	xhttp.send();
-	var tableSchema = {
-            id: "Test_feed",
-            alias: "Test feed",
-            columns: []
-        };
-        schemaCallback([tableSchema]);
+	
     };
 	    
 	    
