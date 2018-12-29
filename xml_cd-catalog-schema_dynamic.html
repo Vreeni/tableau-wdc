@@ -156,21 +156,7 @@ function _findLongestArray(xmlElement, bestSoFar) {
   }
   return bestSoFar;
 }
-// Given an array of js objects, returns a map from data column name to data type
-function _extractHeaders(rowData) {
-  var toRet = {};
-  for (var row = 0; row < rowData.length; ++row) {
-    var rowLine = rowData[row];
-    for (var key in rowLine) {
-      if (rowLine.hasOwnProperty(key)) {
-        if (!(key in toRet)) {
-          toRet[key] = _determineType(rowLine[key]);
-        }
-      }
-    }
-  }
-  return toRet;
-}
+
 	
 	
 	
