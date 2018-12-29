@@ -11,23 +11,19 @@
 (function() {
     // Create the connector object
     var myConnector = tableau.makeConnector();
+	
     // Define the schema (right now is hardcoded > get dynamically?)
-    myConnector.getSchema = function(schemaCallback) {
-        var cols = [{
-            id: "col1",
-            alias: "col1_alias",
-            dataType: tableau.dataTypeEnum.string
-	}, {
-            id: "col2",
-            alias: "col2_alias",
-            dataType: tableau.dataTypeEnum.string
-        }];
-        var tableSchema = {
-            id: "Test_feed",
-            alias: "Test feed",
-            columns: cols
-        };
-        schemaCallback([tableSchema]);
+    myConnector.getSchema = function(tableData) {
+      var headers = tableData.headers;
+      var fieldNames = [];
+      var fieldTypes = [];
+      for (var fieldName in headers) {
+        if (headers.hasOwnProperty(fieldName)) {
+          fieldNames.push(fieldName);
+          fieldTypes.push(headers[fieldName]);
+        }
+      }
+        schemaCallback(fieldNames, fieldTypes); // tell tableau about the fields and their types
     };
 	
 // Get the data from default link/file ==> tbd: get data from input Url
@@ -67,6 +63,28 @@ function myFunction(xml) {
         });
   }
   table.appendRows(tableData);
+}
+	
+function _retrieveXmlData(retrieveDataCallback) {
+   if (!window.cachedTableData) {
+      const proxyurl = "http://cors-anywhere.herokuapp.com/";
+      var xhttp = new XMLHttpRequest();
+    	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var xmlDoc = this.responseXML;
+ 			window.cachedTableData = _xmlToTable(xmlDoc);
+          	 }
+	};
+	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
+        xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
+	xhttp.send();  
+   }
+}
+	
+function _xmlToTable(xmlDocument) {
+  var rowData = _flattenData(xmlDocument);
+  var headers = _extractHeaders(rowData);
+  return {"headers":headers, "rowData":rowData};
 }
 
 	  /*  
