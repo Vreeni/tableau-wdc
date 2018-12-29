@@ -16,19 +16,9 @@
 	
     // Define the schema (right now is hardcoded > get dynamically?)
     myConnector.getSchema = function(schemaCallback) {
-	const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        var xhttp = new XMLHttpRequest();
-    	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			xmlDoc = this.responseXML;
- 			window.cachedTableData = _xmlToTable(xmlDoc);
-          	 }
-	};
-	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
-        xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
-	xhttp.send();      
+      
 	    
-      /*_retrieveXmlData(function(tableData){
+      _retrieveXmlData(function(tableData){
         var headers = tableData.headers;
         var fieldNames = [];
         var fieldTypes = [];
@@ -39,7 +29,7 @@
             fieldTypes.push(headers[fieldName]);
           }
 
-        }*/
+        }
 	 var tableSchema = {
             id: "Test_feed",
             alias: "Test feed",
