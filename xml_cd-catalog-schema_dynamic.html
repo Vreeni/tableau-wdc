@@ -272,6 +272,7 @@ function _findLongestArray(xmlElement, bestSoFar) {
 	
 
 function _submitXMLToTableau(xmlString, xmlUrl) {
+	console.log("submitting xml to tableau");
     var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
     tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
     tableau.connectionData = JSON.stringify(conData);
@@ -291,6 +292,7 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
     */
     $(document).ready(function() {
         $("#submitUrl").click(function() {
+	   console.log("Button submitUrl clicked");
 	   var xmlString = $('input[id=inputURL]')[0].value.trim();
            var xmlUrl = $('textarea[id=inputText]')[0].value.trim();
 	   _submitXMLToTableau(xmlString, xmlUrl);
