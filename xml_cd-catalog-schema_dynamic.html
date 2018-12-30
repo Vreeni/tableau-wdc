@@ -279,22 +279,23 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
     tableau.submit();  
 }
 
-    /*
+    
     // Create event listeners for when the user submits the input url or wants to use default test data
     $(document).ready(function() {
         $("#submitText").click(function() {
+	    console.log("Button submitText clicked");
 	    var dataId = document.getElementById("inputText");
             tableau.connectionName = "Test Data: Using default test data"; // This will be the data source name in Tableau
             tableau.connectionData = dataId;
 	    tableau.submit(); // This sends the connector object to Tableau
         });
     });
-    */
+    
     $(document).ready(function() {
         $("#submitUrl").click(function() {
 	   console.log("Button submitUrl clicked");
-	   var xmlString = $('input[id=inputURL]')[0].value.trim();
-           var xmlUrl = $('textarea[id=inputText]')[0].value.trim();
+	   var xmlString = document.getElementById("inputURL").value.trim();
+           var xmlUrl = document.getElementById("inputText").value.trim();
 	   _submitXMLToTableau(xmlString, xmlUrl);
 	   
         });
