@@ -265,7 +265,7 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
     $(document).ready(function() {
         $("#submitUrl").click(function() {
 	   var xmlString = $('input[id=inputURL]')[0].value.trim();
-           var xmlUrl = $('input[id=inputText]')[0].value.trim();
+           var xmlUrl = $('textarea[id=inputText]')[0].value.trim();
 	   _submitXMLToTableau(xmlString, xmlUrl);
 	   
         });
@@ -288,7 +288,7 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
 <button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit</button>
   <br>
 <p id = "descriptionText">Paste XML file</p>
-<input id="inputText"/>
+<textarea id="inputText"/></textarea>
 <button type = "button" id = "submitText" class = "btn btn-success" style = "margin: 10px;">Submit</button>
   </div>
  </div>
