@@ -22,8 +22,8 @@
 		var singleCol = {
 			id: fieldName,
 			dataType: headers[fieldName]
-		  cols.push(singleCol);
 		}
+		cols.push(singleCol);
              }
          }
 		   
@@ -272,7 +272,7 @@ function _findLongestArray(xmlElement, bestSoFar) {
 	
 
 function _submitXMLToTableau(xmlString, xmlUrl) {
-	console.log("submitting xml to tableau");
+    console.log("submitting xml to tableau");
     var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
     tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
     tableau.connectionData = JSON.stringify(conData);
