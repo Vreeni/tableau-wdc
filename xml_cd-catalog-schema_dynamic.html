@@ -19,6 +19,7 @@
 	var cols = [];   
         for (var fieldName in headers) {
             if (headers.hasOwnProperty(fieldName)) {
+		fieldName = fieldName.replace('#','');
 		var singleCol = {
 			id: fieldName,
 			dataType: headers[fieldName]
