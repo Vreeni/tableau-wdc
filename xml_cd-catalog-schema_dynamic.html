@@ -123,17 +123,9 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
     });
     */
     
-    $(document).ready(function() {
-        $("#submitUrl").click(function() {
-	   var dataId = document.getElementById("inputURL");
-	   tableau.connectionName = "URL: " + dataId;
-	   tableau.connectionData = dataId;
-	   tableau.submit();
-        });
-    });
-	  
+
 	    
-/*	    
+    
     $(document).ready(function() {
         $("#submitUrl").click(function() {
 	   console.log("Button submitUrl clicked");
@@ -147,7 +139,7 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
 	   
         });
     });
-         */  
+         
    })();
   </script>
 
@@ -165,7 +157,7 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
 <button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit URL</button>
   <br>
 <p id = "descriptionText">Paste XML file</p>
-<textarea id="inputText" rows="10" cols="70"//></textarea>
+<textarea id="inputText" rows="10" cols="70"></textarea>
 <button type = "button" id = "submitText" class = "btn btn-success" style = "margin: 10px;">Submit file</button>
   </div>
  </div>
