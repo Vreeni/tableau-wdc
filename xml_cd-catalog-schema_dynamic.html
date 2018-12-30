@@ -125,6 +125,17 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
     
     $(document).ready(function() {
         $("#submitUrl").click(function() {
+	   var dataId = document.getElementById("inputURL");
+	   tableau.connectionName = "URL: " + dataId;
+	   tableau.connectionData = dataId;
+	   tableau.submit();
+        });
+    });
+	  
+	    
+/*	    
+    $(document).ready(function() {
+        $("#submitUrl").click(function() {
 	   console.log("Button submitUrl clicked");
 	   var xmlString = document.getElementById("inputURL");
            var xmlUrl = document.getElementById("inputText");
@@ -136,7 +147,7 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
 	   
         });
     });
-           
+         */  
    })();
   </script>
 
