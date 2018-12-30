@@ -32,7 +32,7 @@
             alias: "XML feed alias",
             columns: cols
         };
-		console.log(cols);
+	console.log(cols);
         schemaCallback([tableSchema]);
        });
     };
@@ -52,37 +52,47 @@
 
   	
     
+function _retrieveXmlData(retrieveDataCallback) {
+  if (!window.cachedTableData) {
+    var conData = JSON.parse(tableau.connectionData);
+    var xmlString = conData.xmlString;
+    if (conData.xmlUrl) {
+      var successCallback = function(data) {
+        window.cachedTableData = _xmlToTable(data);
+        retrieveDataCallback(window.cachedTableData);
+      };
+      _xmlHttpReq(conData.xmlUrl, successCallback);
+      return;
+    }
+    try {
+      var xmlDoc = $.parseXML(conData.xmlString);
+      window.cachedTableData = _xmlToTable(xmlDoc);
+    }
+    catch (e) {
+      tableau.abortWithError("unable to parse xml data");
+      return;
+    }
+  }
+  retrieveDataCallback(window.cachedTableData);
+}
 	    
 	
-/*	    
-function xmlHttpReq(conData.xmlUrl, successCallback) {   
+	    
+function _xmlHttpReq(conData.xmlUrl, successCallback) {   
        	const proxyurl = "https://cors-anywhere.herokuapp.com/";
         var xhttp = new XMLHttpRequest();
     	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var xmlDoc = this.responseXML;
-       			console.log("getting schema" + xmlDoc.length);
-		
-			var cd = xmlDoc.getElementById("CD");
-			console.log("getting tbl" + cd.length);
-
- 			var headers = cd.headers;
-       			var fieldNames = [];
-        		var fieldTypes = [];
-			var tableSchema = {
-           			id: "Test_feed",
-           			alias: "Test feed",
-          			columns: []
-        		};
-			schemaCallback([tableSchema]);
-
+       			console.log("xmlhttpreq success" + xmlDoc.length);
+			successCallback;
           	 }
 	};
 	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
         xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
 	xhttp.send();
     }
-    */
+    
 	  
  
 
