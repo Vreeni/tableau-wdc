@@ -110,7 +110,7 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
     tableau.submit();  
 }
 
-    
+    /*
     // Create event listeners for when the user submits the input url or wants to use default test data
     $(document).ready(function() {
         $("#submitText").click(function() {
@@ -121,13 +121,18 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
 	    tableau.submit(); // This sends the connector object to Tableau
         });
     });
+    */
     
     $(document).ready(function() {
         $("#submitUrl").click(function() {
 	   console.log("Button submitUrl clicked");
-	   var xmlString = document.getElementById("inputURL").value.trim();
-           var xmlUrl = document.getElementById("inputText").value.trim();
-	   _submitXMLToTableau(xmlString, xmlUrl);
+	   var xmlString = document.getElementById("inputURL");
+           var xmlUrl = document.getElementById("inputText");
+	  // _submitXMLToTableau(xmlString, xmlUrl);
+		var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
+    tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
+    tableau.connectionData = JSON.stringify(conData);
+    tableau.submit(); 
 	   
         });
     });
