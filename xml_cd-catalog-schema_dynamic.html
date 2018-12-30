@@ -19,10 +19,9 @@
 	var cols = [];   
         for (var fieldName in headers) {
             if (headers.hasOwnProperty(fieldName)) {
-		fieldName = fieldName.replace('#','');
-		console.log(fieldName);
+		var fieldName_cleaned = fieldName.replace('#','');
 		var singleCol = {
-			id: fieldName,
+			id: fieldName_cleaned,
 			dataType: headers[fieldName]
 		}
 		cols.push(singleCol);
