@@ -109,7 +109,100 @@ function _xmlHttpReq(url, successCallback) {
 	  
  
 
-
+// Takes a hierarchical xml document and tries to turn it into a table
+// Returns an object with headers and the row level data
+function _xmlToTable(xmlDocument) {
+  var rowData = _flattenData(xmlDocument);
+  var headers = _extractHeaders(rowData);
+  return {"headers":headers, "rowData":rowData};
+}
+// Given an object:
+//   - finds the longest array in the xml
+//   - flattens each element in that array so it is a single element with many properties
+// If there is no array that is a descendent of the original object, this wraps
+function _flattenData(xmlDocument) {
+  // first find the longest array
+  var longestArray = _findLongestArray(xmlDocument, xmlDocument);
+  if (!longestArray || longestArray.length == 0) {
+    // if no array found, just wrap the entire object blob in an array
+    longestArray = [objectBlob];
+  }
+  toRet = [];
+  for (var ii = 0; ii < longestArray.childNodes.length; ++ii) {
+    toRet[ii] = _flattenObject(longestArray.childNodes[ii]);
+  }
+  return toRet;
+}
+// Given an element with hierarchical properties, flattens it so all the properties
+// sit on the base element.
+function _flattenObject(xmlElt) {
+  var toRet = {};
+  if (xmlElt.attributes)
+  {
+    for (var attributeNum = 0; attributeNum < xmlElt.attributes.length; ++attributeNum) {
+      var attribute = xmlElt.attributes[attributeNum];
+      toRet[attribute.nodeName] = attribute.nodeValue;
+    }
+  }
+  
+  var children = xmlElt.childNodes;
+  if (!children || !children.length) {
+    if (xmlElt.textContent) {
+      toRet.text = xmlElt.textContent.trim();
+    }
+  } else {  
+  	for (var childNum = 0; childNum < children.length; ++childNum) {
+  	  var child = xmlElt.childNodes[childNum];
+  	  var childName = child.nodeName;
+  	  var subObj = _flattenObject(child);
+  	  for (var k in subObj) {
+  	    if (subObj.hasOwnProperty(k)) {
+  		    toRet[childName + '_' + k] = subObj[k];
+  	    }
+    	}
+  	}
+  }
+  return toRet;
+}
+// Finds the longest array that is a descendent of the given object
+function _findLongestArray(xmlElement, bestSoFar) {
+  var children = xmlElement.childNodes;
+  if (children && children.length) {
+    if (children.length > bestSoFar.childNodes.length) {
+      bestSoFar = xmlElement;
+    }
+    for (var childNum in children) {
+      var subBest = _findLongestArray(children[childNum], bestSoFar);
+      if (subBest.childNodes.length > bestSoFar.childNodes.length) {
+        bestSoFar = subBest;
+      }
+    }
+  }
+  return bestSoFar;
+}
+// Given an array of js objects, returns a map from data column name to data type
+function _extractHeaders(rowData) {
+  var toRet = {};
+  for (var row = 0; row < rowData.length; ++row) {
+    var rowLine = rowData[row];
+    for (var key in rowLine) {
+      if (rowLine.hasOwnProperty(key)) {
+        if (!(key in toRet)) {
+          toRet[key] = _determineType(rowLine[key]);
+        }
+      }
+    }
+  }
+  return toRet;
+}
+// Given a primitive, tries to make a guess at the data type of the input
+function _determineType(primitive) {
+  // possible types: 'float', 'date', 'datetime', 'bool', 'string', 'int'
+  if (parseInt(primitive) == primitive) return 'int';
+  if (parseFloat(primitive) == primitive) return 'float';
+  if (isFinite(new Date(primitive).getTime())) return 'datetime';
+  return 'string';
+}
 	
 
 function _submitXMLToTableau(xmlString, xmlUrl) {
