@@ -14,81 +14,29 @@
 	
     // Define the schema (right now is hardcoded > get dynamically?)
     myConnector.getSchema = function(schemaCallback) {
-	  function _retrieveXmlData(retrieveDataCallback) {
- 		if (!window.cachedTableData) {
-    			var conData = JSON.parse(tableau.connectionData);
-    			var xmlString = conData.xmlString;
-    			if (conData.xmlUrl) {
-      				var successCallback = function(data) {
-        			window.cachedTableData = _xmlToTable(data);
-        			retrieveDataCallback(window.cachedTableData);
-      			};
-      			_basicAjaxRequest1(conData.xmlUrl, successCallback);
-      			return;
-    		}
-    		try {
-      			var xmlDoc = $.parseXML(conData.xmlString);
-     			window.cachedTableData = _xmlToTable(xmlDoc);
-   		}
-    		catch (e) {
-     			tableau.abortWithError("unable to parse xml data");
-     			 return;
-    		}
- 	 }
- 	retrieveDataCallback(window.cachedTableData);
-}
-	    
-	    
-	    
-       	const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        var xhttp = new XMLHttpRequest();
-    	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var xmlDoc = this.responseXML;
-       			console.log("getting schema" + xmlDoc.length);
-		
-			var cd = xmlDoc.getElementById("CD");
-			console.log("getting tbl" + cd.length);
-
- 			var headers = cd.headers;
-       			var fieldNames = [];
-        		var fieldTypes = [];
-			var tableSchema = {
-           			id: "Test_feed",
-           			alias: "Test feed",
-          			columns: []
-        		};
-			schemaCallback([tableSchema]);
-
-          	 }
-	};
-	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
-        xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
-	xhttp.send();
-	
-    };
-	    
-	    
-      /*_retrieveXmlData(function(tableData){
+        _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
-        var fieldNames = [];
-        var fieldTypes = [];
-        console.log("getting schema);
+	var cols = [];   
         for (var fieldName in headers) {
-          if (headers.hasOwnProperty(fieldName)) {
-	    fieldNames.push(fieldName);
-            fieldTypes.push(headers[fieldName]);
-          }
-
-        }
-	 var tableSchema = {
-            id: "Test_feed",
-            alias: "Test feed",
-            columns: fieldNames, fieldTypes
+            if (headers.hasOwnProperty(fieldName)) {
+		var singleCol = {
+			id: fieldName,
+			dataType: headers[fieldName]
+		  cols.push(singleCol);
+		}
+             }
+         }
+		   
+        var tableSchema = {
+            id: "XML feed",
+            alias: "XML feed alias",
+            columns: cols
         };
-        schemaCallback(fieldNames, fieldTypes); // tell tableau about the fields and their types
-      });
-    }*/
+        schemaCallback([tableSchema]);
+    };
+	
+	    
+
 	
 // Get the data from default link/file ==> tbd: get data from input Url
  myConnector.getData = function(table, doneCallback) {
@@ -115,7 +63,85 @@
 	xhttp.send();
 	};
       tableau.registerConnector(myConnector);
+    
+	    
+	
+	    
+function xmlHttpReq(conData.xmlUrl, successCallback) {   
+       	const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        var xhttp = new XMLHttpRequest();
+    	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var xmlDoc = this.responseXML;
+       			console.log("getting schema" + xmlDoc.length);
+		
+			var cd = xmlDoc.getElementById("CD");
+			console.log("getting tbl" + cd.length);
+
+ 			var headers = cd.headers;
+       			var fieldNames = [];
+        		var fieldTypes = [];
+			var tableSchema = {
+           			id: "Test_feed",
+           			alias: "Test feed",
+          			columns: []
+        		};
+			schemaCallback([tableSchema]);
+
+          	 }
+	};
+	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
+        xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
+	xhttp.send();
+    }
+	  
+ function _retrieveXmlData(retrieveDataCallback) {
+ 		if (!window.cachedTableData) {
+    			var conData = JSON.parse(tableau.connectionData);
+    			var xmlString = conData.xmlString;
+    			if (conData.xmlUrl) {
+      				var successCallback = function(data) {
+        			    window.cachedTableData = _xmlToTable(data);
+        			    retrieveDataCallback(window.cachedTableData);
+      				};
+      				_basicAjaxRequest1(conData.xmlUrl, successCallback);
+      				return;
+    			}
+    			try {
+      				var xmlDoc = $.parseXML(conData.xmlString);
+     				window.cachedTableData = _xmlToTable(xmlDoc);
+   			}
+    			catch (e) {
+     				tableau.abortWithError("unable to parse xml data");
+     			 	return;
+    			}
+ 		 }
+ 	retrieveDataCallback(window.cachedTableData);
+}
+	    
+      /*_retrieveXmlData(function(tableData){
+        var headers = tableData.headers;
+        var fieldNames = [];
+        var fieldTypes = [];
+        console.log("getting schema);
+        for (var fieldName in headers) {
+          if (headers.hasOwnProperty(fieldName)) {
+	    fieldNames.push(fieldName);
+            fieldTypes.push(headers[fieldName]);
+          }
+
+        }
+	 var tableSchema = {
+            id: "Test_feed",
+            alias: "Test feed",
+            columns: fieldNames, fieldTypes
+        };
+        schemaCallback(fieldNames, fieldTypes); // tell tableau about the fields and their types
+      });
+    }*/	
+	
       
+	    
 function myFunction(xml) {
   var xmlDoc = xml.responseXML;
   var tableCD = xmlDoc.getElementsByTagName("CD");
@@ -285,11 +311,11 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
 
 <p id = "descriptionUrl">Enter URL to XML file</p>
 <input id="inputURL" >
-<button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit</button>
+<button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit URL</button>
   <br>
 <p id = "descriptionText">Paste XML file</p>
 <textarea id="inputText" rows="10" cols="70"//></textarea>
-<button type = "button" id = "submitText" class = "btn btn-success" style = "margin: 10px;">Submit</button>
+<button type = "button" id = "submitText" class = "btn btn-success" style = "margin: 10px;">Submit file</button>
   </div>
  </div>
 </div>
