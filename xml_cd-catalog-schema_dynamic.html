@@ -45,6 +45,7 @@
  myConnector.getData = function(table, doneCallback) {
       _retrieveXmlData(function (tableData) {
         var rowData = tableData.rowData;
+	console.log(rowData);
 	table.appendRows(tableData);
 	doneCallback();
       });
