@@ -44,8 +44,10 @@
 // Get the data from default link/file ==> tbd: get data from input Url
  myConnector.getData = function(table, doneCallback) {
       _retrieveXmlData(function (tableData) {
+	if (tableData.rowData != null){
         var rowData = tableData.rowData;
 	console.log(rowData);
+	}
 	table.appendRows(tableData);
 	doneCallback();
       });
