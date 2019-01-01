@@ -57,7 +57,10 @@
         	}
     	}, Object.create(null));
 	console.log('Rowdata_filtered: ' + filtered);
-	var rowData_cleaned = rowData.replace('#','');
+	var rowData_cleaned;
+	for (var i in rowData) { 
+		rowData_cleaned = i.replace('#','');
+	}
 	console.log('Rowdata_cleaned: ' + rowData_cleaned);
 	table.appendRows(rowData_cleaned);
 	doneCallback();
