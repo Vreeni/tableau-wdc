@@ -17,7 +17,7 @@
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
 	console.log(headers);
-	delete headers.regex;
+	delete headers.text;
 	console.log(headers);
 	var cols = [];   
         for (var fieldName in headers) {
