@@ -60,7 +60,7 @@
 	var rowData_cleaned = [];
 	for (var object in rowData) { 
 		for (var property in object) {
-			 if (object_cleaned.hasOwnProperty(property)) {   
+			 if (object.hasOwnProperty(property)) {   
 				var property_cleaned = property.replace('#','');
 				 var object_cleaned = {property_cleaned};
 			 }
