@@ -56,9 +56,10 @@
             		return true;
         	}
     	}, Object.create(null));
-	console.log(filtered);
-	
-	table.appendRows(filtered);
+	console.log('Rowdata_filtered: ' + filtered);
+	var rowData_cleaned = rowData.replace('#','');
+	console.log('Rowdata_cleaned: ' + rowData_cleaned);
+	table.appendRows(rowData_cleaned);
 	doneCallback();
       });
   };
