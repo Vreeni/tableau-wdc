@@ -17,15 +17,8 @@
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
 	console.log(headers);
-	filtered = headers.filter(function (a) {
-        	var temp = Object.keys(a).map(function (k) { return a[k]; }),
-           	k = temp.join('|');
-       		if (!this[k] && temp.join('text')) {
-            		this[k] = true;
-            		return true;
-        	}
-    	}, Object.create(null));
-	console.log(filtered);
+	var objectWithNoJunk = _.pick(headers, ['ARTIST_#text_text', 'COMPANY_#text_text', 'COUNTRY_#text_text', 'PRICE_#text_text', 'TITLE_#text_text', 'YEAR_#text_text']);
+	console.log(objectWithNoJunk);
 	var cols = [];   
         for (var fieldName in headers) {
             if (headers.hasOwnProperty(fieldName)) {   
