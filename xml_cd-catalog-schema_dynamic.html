@@ -64,8 +64,8 @@
 			var property_cleaned = property.replace('#','');
 			object_cleaned.push(property_cleaned);
 		}
+		rowData_cleaned.push(object_cleaned);
 	}
-	rowData_cleaned.push(object_cleaned);
 	console.log('Rowdata_cleaned: ' + rowData_cleaned);
 	table.appendRows(filtered);
 	doneCallback();
