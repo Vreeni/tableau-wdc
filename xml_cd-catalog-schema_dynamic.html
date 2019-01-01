@@ -57,9 +57,9 @@
         	}
     	}, Object.create(null));
 	console.log('Rowdata_filtered: ' + filtered);
-	var rowData_cleaned;
-	var object_cleaned;
+	var rowData_cleaned = rowData;
 	for (var object in rowData) { 
+		var object_cleaned = object;
 		for (var property in object) {
 			var property_cleaned = property.replace('#','');
 			object_cleaned.push(property_cleaned);
