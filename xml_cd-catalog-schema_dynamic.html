@@ -52,6 +52,7 @@
         	var temp = Object.keys(a).map(function (k) { return a[k]; }),
            		 k = temp.join('|');
        		if (!this[k] && temp.join('')) {
+			this[k] = this[k].replace('#', '');
             		this[k] = true;
             		return true;
         	}
@@ -62,7 +63,7 @@
 		rowData_cleaned = i.replace('#','');
 	}
 	console.log('Rowdata_cleaned: ' + rowData_cleaned);
-	table.appendRows(rowData_cleaned);
+	table.appendRows(filtered);
 	doneCallback();
       });
   };
