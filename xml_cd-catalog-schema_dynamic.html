@@ -17,8 +17,8 @@
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
 	console.log(headers);
-	var objectWithNoJunk = _.pick(headers, ['ARTIST_#text_text', 'COMPANY_#text_text', 'COUNTRY_#text_text', 'PRICE_#text_text', 'TITLE_#text_text', 'YEAR_#text_text']);
-	console.log(objectWithNoJunk);
+	delete headers.regex;
+	console.log(headers);
 	var cols = [];   
         for (var fieldName in headers) {
             if (headers.hasOwnProperty(fieldName)) {   
