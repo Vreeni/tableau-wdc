@@ -52,16 +52,20 @@
         	var temp = Object.keys(a).map(function (k) { return a[k]; }),
            		 k = temp.join('|');
        		if (!this[k] && temp.join('')) {
-			this[k] = this[k].replace('#', '');
             		this[k] = true;
             		return true;
         	}
     	}, Object.create(null));
 	console.log('Rowdata_filtered: ' + filtered);
 	var rowData_cleaned;
-	for (var i in rowData) { 
-		rowData_cleaned = i.replace('#','');
+	var object_cleaned;
+	for (var object in rowData) { 
+		for (var property in object) {
+			var property_cleaned = property.replace('#','');
+		}
+		object_cleaned.push(property_cleaned);
 	}
+	rowData_cleaned.push(object_cleaned);
 	console.log('Rowdata_cleaned: ' + rowData_cleaned);
 	table.appendRows(filtered);
 	doneCallback();
