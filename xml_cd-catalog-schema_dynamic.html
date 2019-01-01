@@ -19,8 +19,17 @@
 	console.log(headers);
 	var cols = [];   
         for (var fieldName in headers) {
-            if (headers.hasOwnProperty(fieldName)) {
+            if (headers.hasOwnProperty(fieldName)) {   
 		var fieldName_cleaned = fieldName.replace('#','');
+		filtered = fieldName_cleaned.filter(function (a) {
+        		var temp = Object.keys(a).map(function (k) { return a[k]; }),
+           		k = temp.join('|');
+       			if (!this[k] && temp.join('text')) {
+            			this[k] = true;
+            			return true;
+        		}
+    		}, Object.create(null));
+		console.log(filtered);
 		var singleCol = {
 			id: fieldName_cleaned,
 			dataType: headers[fieldName]
