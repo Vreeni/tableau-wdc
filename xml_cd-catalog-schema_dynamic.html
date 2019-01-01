@@ -57,12 +57,11 @@
         	}
     	}, Object.create(null));
 	console.log('Rowdata_filtered: ' + filtered);
-	var rowData_cleaned = rowData;
+	var rowData_cleaned = [];
 	for (var object in rowData) { 
 		var object_cleaned = object;
-		for (var property in object) {
-			var property_cleaned = property.replace('#','');
-			object_cleaned.push(property_cleaned);
+		for (var property in object_cleaned) {
+			property = property.replace('#','');
 		}
 		rowData_cleaned.push(object_cleaned);
 	}
