@@ -62,8 +62,8 @@
 	for (var object in rowData) { 
 		for (var property in object) {
 			var property_cleaned = property.replace('#','');
+			object_cleaned.push(property_cleaned);
 		}
-		object_cleaned.push(property_cleaned);
 	}
 	rowData_cleaned.push(object_cleaned);
 	console.log('Rowdata_cleaned: ' + rowData_cleaned);
