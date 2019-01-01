@@ -16,6 +16,7 @@
     myConnector.getSchema = function(schemaCallback) {
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
+	console.log(headers);
 	var cols = [];   
         for (var fieldName in headers) {
             if (headers.hasOwnProperty(fieldName)) {
