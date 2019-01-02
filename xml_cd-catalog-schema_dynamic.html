@@ -17,13 +17,13 @@
     myConnector.getSchema = function(schemaCallback) {
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
-	if (headerconsole.log(headers);
+	console.log(headers);
 	var tableX = xmlDoc.getElementsByTagName("CD");	
 	//in test file, a header named "text" was created that didnt have any row data. Could be deleted to clean up the table
 	//delete headers.text;
 	var cols = [];   
         for (var fieldName in headers) {
-		if (
+		//if (
             if (headers.hasOwnProperty(fieldName)) {  
 		var fieldName_cleaned = fieldName.replace('#','');
 		var singleCol = {
