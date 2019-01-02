@@ -17,13 +17,14 @@
     myConnector.getSchema = function(schemaCallback) {
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
-	console.log(headers);
+	if (headerconsole.log(headers);
+	var tableX = xmlDoc.getElementsByTagName("CD");	
 	//in test file, a header named "text" was created that didnt have any row data. Could be deleted to clean up the table
 	//delete headers.text;
-	console.log(headers);
 	var cols = [];   
         for (var fieldName in headers) {
-            if (headers.hasOwnProperty(fieldName)) {   
+		if (
+            if (headers.hasOwnProperty(fieldName)) {  
 		var fieldName_cleaned = fieldName.replace('#','');
 		var singleCol = {
 			id: fieldName_cleaned,
@@ -86,7 +87,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 	 console.log(conData.xmlString);
 
     var xmlString = conData.xmlString;
-    if (conData.xmlUrl) {
+    if (conData.xmlUrl != null) {
 	console.log(conData.xmlUrl);
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
 	const url = conData.xmlUrl;
