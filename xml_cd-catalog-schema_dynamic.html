@@ -253,8 +253,8 @@ function _determineType(primitive) {
 	   //var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
 		
 	    var conData = {
-            'xmlUrl':  $('input[name=xmlUrl]')[0].value.trim();
-            'xmlString': $('textarea[name=xmlText]')[0].value.trim();
+            'xmlUrl':  $('xmlUrl').val().trim();
+            'xmlString': $('xmlText').val().trim();
             };
 		
 	   tableau.log("conData:" + conData);
