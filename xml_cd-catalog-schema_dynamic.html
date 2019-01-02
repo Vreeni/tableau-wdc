@@ -13,14 +13,13 @@
     var myConnector = tableau.makeConnector();
     var input_url;
     var input_text;
-    var xmlString;
 
 	
     // Define the schema (right now is hardcoded > get dynamically?)
     myConnector.getSchema = function(schemaCallback) {
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
-	console.log('Inpute data: ' + xmlString);
+	console.log('Input data: ' + xmlString);
 	//in test file, a header named "text" was created that didnt have any row data. Could be deleted to clean up the table
 	//delete headers.text;
 	var cols = [];   
@@ -86,9 +85,9 @@
 function _retrieveXmlData(retrieveDataCallback) {
   if (!window.cachedTableData) {
     var conData = JSON.parse(tableau.connectionData);
-	 console.log(conData.xmlString);
-
-    xmlString = conData.xmlString;
+    var tableName = conData.tableName;
+    console.log("Table name: " + tableName);
+    var xmlString = conData.xmlString;
     if (conData.xmlUrl) {
 	console.log(conData.xmlUrl);
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -142,9 +141,11 @@ function _xmlHttpReq(url, successCallback) {
 // Takes a hierarchical xml document and tries to turn it into a table
 // Returns an object with headers and the row level data
 function _xmlToTable(xmlDocument) {
+  var tableName = xmlDocument.getElementsByTagName("CD"); //enable this table name to be defined by user input
   var rowData = _flattenData(xmlDocument);
   var headers = _extractHeaders(rowData);
-  return {"headers":headers, "rowData":rowData};
+  var tableName = xmlDocument.getElementsByTagName("CD"); //enable this table name to be defined by user input
+  return {"headers": headers, "rowData":rowData};
 }
 // Given an object:
 //   - finds the longest array in the xml
@@ -213,6 +214,8 @@ function _findLongestArray(xmlElement, bestSoFar) {
 // Given an array of js objects, returns a map from data column name to data type
 function _extractHeaders(rowData) {
   var toRet = {};
+  var tableName_array = xmlDocument.getElementsByTagName("CD"); //enable this table name to be defined by user input
+  console.log(tableName_array);
   for (var row = 0; row < rowData.length; ++row) {
     var rowLine = rowData[row];
     for (var key in rowLine) {
@@ -256,7 +259,8 @@ function _determineType(primitive) {
 	   console.log("Button submitUrl clicked");
 	   var xmlUrl = document.getElementById("xmlUrl").value;
            var xmlString = document.getElementById("xmlText").value;
-	   var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
+	   var tableName = "CD";
+	   var conData = {"tableName": tableName, "xmlString" : xmlString, "xmlUrl": xmlUrl};
 		
 	    /*var conData = {
             'xmlUrl':  $('xmlUrl').val().trim(),
