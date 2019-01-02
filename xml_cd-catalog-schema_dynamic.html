@@ -61,7 +61,7 @@
             		return true;
         	}
     	}, Object.create(null));
-	console.log(filtered);
+	//console.log(filtered);
 	//loop through the array of objects to remove special characters (just as it was done with the headers)         
 	filtered.map(function(item) {
 		Object.keys(item).forEach(function(key) {
@@ -85,7 +85,7 @@ function _retrieveXmlData(retrieveDataCallback) {
   if (!window.cachedTableData) {
     var conData = JSON.parse(tableau.connectionData);
     var tableName = conData.tableName;
-    console.log("Table name: " + tableName);
+    console.log(tableName);
     console.log(conData.xmlString);
     var xmlString = conData.xmlString;
     if (conData.xmlUrl) {
