@@ -49,6 +49,7 @@
 // Get the data from default link/file ==> tbd: get data from input Url
  myConnector.getData = function(table, doneCallback) {
       _retrieveXmlData(function (tableData) {
+	 console.log(table.tableInfo.id);
 	var rowData = tableData.rowData;
 	//loop through the array of objects to remove objects that are null
         filtered = rowData.filter(function (a) {
@@ -83,7 +84,6 @@ function _retrieveXmlData(retrieveDataCallback) {
   if (!window.cachedTableData) {
     var conData = JSON.parse(tableau.connectionData);
 	 console.log(conData.xmlString);
-	 console.log(table.tableInfo.id);
 
     var xmlString = conData.xmlString;
     if (conData.xmlUrl) {
