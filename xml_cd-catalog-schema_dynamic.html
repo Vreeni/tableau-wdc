@@ -148,7 +148,7 @@ function _xmlHttpReq(url, successCallback) {
 function _xmlToTable(xmlDocument) {
   var rowData = _flattenData(xmlDocument);
   var headers = _extractHeaders(rowData);
-  var tableName = xmlDocument.getElementsByTagName("CD"); //enable this table name to be defined by user input
+  var tableName = "TableXY"; //enable this table name to be defined by user input
   return {"headers": headers, "rowData":rowData, "xml_raw": xmlDocument};
 }
 // Given an object:
