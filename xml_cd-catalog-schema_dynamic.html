@@ -226,29 +226,9 @@ function _determineType(primitive) {
   if (isFinite(new Date(primitive).getTime())) return 'datetime';
   return 'string';
 }
-	
-
-$(document).ready(function(){
-  var cancel = function (e) {    
-      e.stopPropagation();
-      e.preventDefault();
-  }
-  $("#inputForm").submit(function(e) { // This event fires when a button is clicked
-    // Since we use a form for input, make sure to stop the default form behavior
-    cancel(e);
-    var xmlString = $('textarea[name=xmlText]')[0].value.trim();
-    var xmlUrl = $('input[name=xmlUrl]')[0].value.trim();
-    //_submitXMLToTableau(xmlString, xmlUrl);
-    var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
-    tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
-    tableau.connectionData = JSON.stringify(conData);
-    tableau.submit();   
-  });
+	  
+        
     
-    
-
-	    
-    /*
     $(document).ready(function() {
         $("#submitUrl").click(function() {
 	   console.log("Button submitUrl clicked");
@@ -262,7 +242,7 @@ $(document).ready(function(){
 	   
         });
     });
-    */
+    
          
    })();
   </script>
@@ -274,17 +254,8 @@ $(document).ready(function(){
 
 <body>
 	
-<form id="inputForm" action="">
-  Enter a URL for XML data: 
-  <input type="text" name="xmlUrl" size="50" />  
-  <br>
-  Or paste XML data below
-  <br>
-  <textarea name="xmlText" rows="10" cols="70"/></textarea>
-  <input type="submit" value="Submit">
-</form>
 	
-<!--
+
  <div class="container container-table">
         <div class="row vertical-center-row">
            <div class="text-center col-md-4 col-md-offset-4">
@@ -299,7 +270,7 @@ $(document).ready(function(){
   </div>
  </div>
 </div>
--->
+
 
 </body>	
 </html>
