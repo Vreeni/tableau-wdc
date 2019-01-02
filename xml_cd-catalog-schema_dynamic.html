@@ -81,6 +81,7 @@
 function _retrieveXmlData(retrieveDataCallback) {
   if (!window.cachedTableData) {
     var conData = JSON.parse(tableau.connectionData);
+	 console.log(conData.xmlString);
     var xmlString = conData.xmlString;
     if (conData.xmlUrl) {
 	console.log(conData.xmlUrl);
@@ -250,7 +251,6 @@ function _determineType(primitive) {
 	   var xmlUrl = document.getElementById("inputURL");
            var xmlString = document.getElementById("inputText");
 	   var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
-	   console.log(xmlUrl);
     	   tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
     	   tableau.connectionData = JSON.stringify(conData);
     	   tableau.submit(); 
@@ -271,7 +271,7 @@ function _determineType(primitive) {
            <div class="text-center col-md-4 col-md-offset-4">
 
 <p id = "descriptionUrl">Enter URL to XML file</p>
-<input id="inputURL" >
+<input id="inputURL">
 <button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit URL</button>
   <br>
 <p id = "descriptionText">Paste XML file</p>
