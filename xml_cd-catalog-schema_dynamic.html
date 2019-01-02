@@ -19,7 +19,7 @@
     myConnector.getSchema = function(schemaCallback) {
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
-	console.log('Input data: ' + xmlString);
+	console.log(headers);
 	//in test file, a header named "text" was created that didnt have any row data. Could be deleted to clean up the table
 	//delete headers.text;
 	var cols = [];   
