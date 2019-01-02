@@ -248,15 +248,17 @@ function _determineType(primitive) {
     $(document).ready(function() {
         $("#submitUrl").click(function() {
 	   console.log("Button submitUrl clicked");
-	   var xmlUrl = document.getElementById("inputURL");
-           var xmlString = document.getElementById("inputText");
+	   //var xmlUrl = document.getElementById("xmlUrl");
+           //var xmlString = document.getElementById("xmlText");
 	   //var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
 		
 	    var conData = {
-            xmlUrl: $('#inputURL').val().trim(),
-            xmlString: $('#inputText').val().trim(),
+            'xmlUrl':  $('input[name=xmlUrl]')[0].value.trim();
+            'xmlString': $('textarea[name=xmlText]')[0].value.trim();
             };
 		
+	   tableau.log("conData:" + conData);
+
     	   tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
     	   tableau.connectionData = JSON.stringify(conData);
     	   tableau.submit(); 
@@ -277,11 +279,11 @@ function _determineType(primitive) {
            <div class="text-center col-md-4 col-md-offset-4">
 
 <p id = "descriptionUrl">Enter URL to XML file</p>
-<input id='inputURL'>
+<input id='xmlUrl'>
 <button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit URL</button>
   <br>
 <p id = "descriptionText">Paste XML file</p>
-<textarea id='inputText' rows="10" cols="70"></textarea>
+<textarea id='xmlText' rows="10" cols="70"></textarea>
 <button type = "button" id = "submitText" class = "btn btn-success" style = "margin: 10px;">Submit file</button>
   </div>
  </div>
