@@ -17,7 +17,8 @@
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
 	console.log(headers);
-	delete headers.text;
+	//in test file, a header named "text" was created that didnt have any row data and that got repeated after every full row as an empty object
+	//delete headers.text;
 	console.log(headers);
 	var cols = [];   
         for (var fieldName in headers) {
