@@ -250,7 +250,13 @@ function _determineType(primitive) {
 	   console.log("Button submitUrl clicked");
 	   var xmlUrl = document.getElementById("inputURL");
            var xmlString = document.getElementById("inputText");
-	   var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
+	   //var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
+		
+	    var conData = {
+            "xmlUrl": $('#inputURL').val().trim(),
+            "xmlString": $('#inputText').val().trim(),
+            };
+		
     	   tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
     	   tableau.connectionData = JSON.stringify(conData);
     	   tableau.submit(); 
