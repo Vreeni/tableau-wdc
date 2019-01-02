@@ -98,10 +98,10 @@ function _retrieveXmlData(retrieveDataCallback) {
 			var xmlDoc = this.responseXML;
 			console.log(xmlDoc);
 			//filter data for one specific tag
-			var tag1 = xmlDoc.getElementsByTagName("CD")[0]; //enable this table name to be defined by user input
+			var tag1 = xmlDoc.getElementsByTagName("CD")[0].childnodes[0]; //enable this table name to be defined by user input
 			console.log(tag1);
 			//send only the data with this tagname to be converted into a table
-			window.cachedTableData = _xmlToTable(tag1, xmlDoc);
+			window.cachedTableData = _xmlToTable(tag1);
 			retrieveDataCallback(window.cachedTableData);
           	 }
 	};
@@ -145,8 +145,8 @@ function _xmlHttpReq(url, successCallback) {
 
 // Takes a hierarchical xml document and tries to turn it into a table
 // Returns an object with headers and the row level data
-function _xmlToTable(selectedTag, xmlDocument) {
-  var rowData = _flattenData(selectedTag);
+function _xmlToTable(xmlDocument) {
+  var rowData = _flattenData(xmlDocument);
   var headers = _extractHeaders(rowData);
   var tableName = xmlDocument.getElementsByTagName("CD"); //enable this table name to be defined by user input
   return {"headers": headers, "rowData":rowData, "xml_raw": xmlDocument};
