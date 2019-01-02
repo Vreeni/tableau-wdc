@@ -86,7 +86,6 @@ function _retrieveXmlData(retrieveDataCallback) {
     var conData = JSON.parse(tableau.connectionData);
     var tableName = conData.tableName;
     console.log(tableName);
-    console.log(conData.xmlString);
     var xmlString = conData.xmlString;
     if (conData.xmlUrl) {
 	console.log(conData.xmlUrl);
