@@ -63,12 +63,12 @@
 		Object.keys(item).forEach(function(key) {
   			var newkey = key.replace('#','');
   			item[newkey] = item[key];
-  			delete item[key];
+			if (item[key] !== item[neykey]) {
+  				delete item[key];
+			}
 		});  
 		
 	});
-	      
-	      
 	console.log(filtered);
 	table.appendRows(filtered);
 	doneCallback();
