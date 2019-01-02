@@ -228,12 +228,6 @@ function _determineType(primitive) {
 }
 	
 
-function _submitXMLToTableau(xmlString, xmlUrl) {
-    var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
-    tableau.connectionData = JSON.stringify(conData);
-    tableau.submit();  
-}
-
 $(document).ready(function(){
   var cancel = function (e) {    
       e.stopPropagation();
@@ -250,30 +244,6 @@ $(document).ready(function(){
     tableau.connectionData = JSON.stringify(conData);
     tableau.submit();   
   });
-  var ddHandler = $("#dragandrophandler");
-  ddHandler.on('dragenter', function (e) 
-  {
-      cancel(e);
-      $(this).css('border', '2px solid #0B85A1');
-  }).on('dragover', cancel)
-    .on('drop', function (e) 
-  {
-       $(this).css('border', '2px dashed #0B85A1');
-       e.preventDefault();
-       var files = e.originalEvent.dataTransfer.files;
-       var file = files[0];
-       var reader = new FileReader();
-       reader.onload = function(e) { _submitXMLToTableau(reader.result); };
-       reader.readAsText(file);
-  });
-  $(document).on('dragenter', cancel)
-             .on('drop', cancel)
-             .on('dragover', function (e) 
-  {
-    cancel(e);
-    ddHandler.css('border', '2px dashed #0B85A1');
-  });
-
     
     
 
@@ -297,17 +267,7 @@ $(document).ready(function(){
    })();
   </script>
 
-<style>
-#dragandrophandler {
-  border:1px dashed #999;
-  width:300px;
-  color:#333;
-  text-align:left;vertical-align:middle;
-  padding:10px 10px 10 10px;
-  margin:10px;
-  font-size:150%;
-}
-</style>	
+	
 	
 </head>
 
@@ -317,8 +277,6 @@ $(document).ready(function(){
 <form id="inputForm" action="">
   Enter a URL for XML data: 
   <input type="text" name="xmlUrl" size="50" />  
-  <br>
-  <div id="dragandrophandler">Or Drag & Drop Files Here</div>
   <br>
   Or paste XML data below
   <br>
