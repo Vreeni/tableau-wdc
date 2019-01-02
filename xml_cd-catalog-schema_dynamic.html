@@ -250,11 +250,11 @@ function _determineType(primitive) {
 	   console.log("Button submitUrl clicked");
 	   var xmlUrl = document.getElementById("inputURL");
            var xmlString = document.getElementById("inputText");
-	   var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
+	   //var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
 		
-	    var conata = {
-            "xmlUrl": $('#inputURL').val().trim(),
-            "xmlString": $('#inputText').val().trim(),
+	    var conData = {
+            xmlUrl: $('#inputURL').val().trim(),
+            xmlString: $('#inputText').val().trim(),
             };
 		
     	   tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
@@ -277,11 +277,11 @@ function _determineType(primitive) {
            <div class="text-center col-md-4 col-md-offset-4">
 
 <p id = "descriptionUrl">Enter URL to XML file</p>
-<input id="inputURL">
+<input id='inputURL'>
 <button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit URL</button>
   <br>
 <p id = "descriptionText">Paste XML file</p>
-<textarea id="inputText" rows="10" cols="70"></textarea>
+<textarea id='inputText' rows="10" cols="70"></textarea>
 <button type = "button" id = "submitText" class = "btn btn-success" style = "margin: 10px;">Submit file</button>
   </div>
  </div>
