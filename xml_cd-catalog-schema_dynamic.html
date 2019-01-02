@@ -83,6 +83,7 @@ function _retrieveXmlData(retrieveDataCallback) {
     var conData = JSON.parse(tableau.connectionData);
     var xmlString = conData.xmlString;
     if (conData.xmlUrl) {
+	console.log(conData.xmlUrl);
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
 	const url = conData.xmlUrl;
         var xhttp = new XMLHttpRequest();
