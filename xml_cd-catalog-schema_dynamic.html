@@ -84,6 +84,7 @@ function _retrieveXmlData(retrieveDataCallback) {
     var xmlString = conData.xmlString;
     if (conData.xmlUrl) {
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
+	const url = conData.xmlUrl;
         var xhttp = new XMLHttpRequest();
     	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -94,7 +95,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 	};
 	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
         //Test url https://www.w3schools.com/xml/cd_catalog.xml
-	xhttp.open('GET', proxyurl + conData.xmlUrl, true);
+	xhttp.open('GET', proxyurl + url, true);
 	xhttp.send();
         return;
     }
