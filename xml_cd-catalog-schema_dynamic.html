@@ -87,7 +87,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 	 console.log(conData.xmlString);
 
     var xmlString = conData.xmlString;
-    if (conData.xmlUrl != null) {
+    if (conData.xmlUrl) {
 	console.log(conData.xmlUrl);
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
 	const url = conData.xmlUrl;
