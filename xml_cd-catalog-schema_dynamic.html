@@ -98,9 +98,10 @@ function _retrieveXmlData(retrieveDataCallback) {
 			var xmlDoc = this.responseXML;
 			console.log(xmlDoc);
 			//filter data for one specific tag
-			var tag1 = xmlDoc.getElementsByTagName("CD")[0]; //enable this table name to be defined by user input
+			var tag1 = xmlDoc.getElementsByTagName("CD"); //enable this table name to be defined by user input
 			console.log(tag1);
-			//send only the data with this tagname to be converted into a table
+			//send only the data with this tagname to be converted into a table ==> 
+			//not working cause only picks the first header name as well then
 			window.cachedTableData = _xmlToTable(tag1);
 			retrieveDataCallback(window.cachedTableData);
           	 }
@@ -123,26 +124,7 @@ function _retrieveXmlData(retrieveDataCallback) {
   retrieveDataCallback(window.cachedTableData);
 }
 	    
-	
-	    
-function _xmlHttpReq(url, successCallback) {   
-       	const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        var xhttp = new XMLHttpRequest();
-    	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var xmlDoc = this.responseXML;
-       			console.log("xmlhttpreq success" + xmlDoc.length);
-			successCallback;
-          	 }
-	};
-	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
-        xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
-	xhttp.send();
-    }
-    
-	  
- 
-
+	   
 // Takes a hierarchical xml document and tries to turn it into a table
 // Returns an object with headers and the row level data
 function _xmlToTable(xmlDocument) {
@@ -240,22 +222,6 @@ function _determineType(primitive) {
   if (isFinite(new Date(primitive).getTime())) return 'datetime';
   return 'string';
 }
-	  
-        
-    /*
-    // Create event listeners for when the user submits the input url or wants to use default test data
-    $(document).ready(function() {
-        $("#submitText").click(function() {
-	    console.log("Button submitText clicked");
-	    var dataId = document.getElementById("inputText");
-            tableau.connectionName = "Test Data: Using default test data"; // This will be the data source name in Tableau
-            tableau.connectionData = dataId;
-	    tableau.submit(); // This sends the connector object to Tableau
-        });
-    });
-	*/
-    
-    
 	    
     
     $(document).ready(function() {
