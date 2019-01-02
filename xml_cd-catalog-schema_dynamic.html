@@ -11,13 +11,16 @@
 (function() {
     // Create the connector object
     var myConnector = tableau.makeConnector();
+    var input_url;
+    var input_text;
+    var xmlString;
 
 	
     // Define the schema (right now is hardcoded > get dynamically?)
     myConnector.getSchema = function(schemaCallback) {
         _retrieveXmlData(function (tableData) {
         var headers = tableData.headers;
-	console.log(headers);
+	console.log(xmlString);
 	//in test file, a header named "text" was created that didnt have any row data. Could be deleted to clean up the table
 	//delete headers.text;
 	var cols = [];   
@@ -85,7 +88,7 @@ function _retrieveXmlData(retrieveDataCallback) {
     var conData = JSON.parse(tableau.connectionData);
 	 console.log(conData.xmlString);
 
-    var xmlString = conData.xmlString;
+    xmlString = conData.xmlString;
     if (conData.xmlUrl) {
 	console.log(conData.xmlUrl);
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
