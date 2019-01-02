@@ -98,7 +98,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 			var xmlDoc = this.responseXML;
 			console.log(xmlDoc);
 			//filter data for one specific tag
-			var tag1 = xmlDoc.getElementsByTagName("CATALOG").innerHTML; //enable this table name to be defined by user input
+			var tag1 = xmlDoc.getElementsByTagName("CATALOG")[0].innerHTML; //enable this table name to be defined by user input
 			console.log(tag1);
 			//send only the data with this tagname to be converted into a table ==> 
 			//not working cause only picks the first header name as well then
