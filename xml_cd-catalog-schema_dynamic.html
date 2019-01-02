@@ -244,7 +244,11 @@ $(document).ready(function(){
     cancel(e);
     var xmlString = $('textarea[name=xmlText]')[0].value.trim();
     var xmlUrl = $('input[name=xmlUrl]')[0].value.trim();
-    _submitXMLToTableau(xmlString, xmlUrl);
+    //_submitXMLToTableau(xmlString, xmlUrl);
+    var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
+    tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
+    tableau.connectionData = JSON.stringify(conData);
+    tableau.submit();   
   });
   var ddHandler = $("#dragandrophandler");
   ddHandler.on('dragenter', function (e) 
