@@ -48,6 +48,7 @@
  myConnector.getData = function(table, doneCallback) {
       _retrieveXmlData(function (tableData) {
 	var rowData = tableData.rowData;
+	//loop through the array of objects to remove objects that are null
         filtered = rowData.filter(function (a) {
         	var temp = Object.keys(a).map(function (k) { return a[k]; }),
            		 k = temp.join('|');
@@ -57,17 +58,14 @@
         	}
     	}, Object.create(null));
 	console.log(filtered);
-	var rowData_cleaned = [];
-	for (var object in rowData) { 
-		for (var property in object) {
-			 if (object.hasOwnProperty(property)) {   
-				var property_cleaned = property.replace('#','');
-				 var object_cleaned = {property_cleaned};
-			 }
-		}
-		rowData_cleaned.push(object_cleaned);
-	}
-	console.log(rowData_cleaned);
+	//loop through the array of objects to remove special characters (just as it was done with the headers)
+	filtered.map(function(item) {
+ 		var objkeys = Object.keys(item);
+  		for (var i in objkeys) {
+    			item[objkeys[i]] = item[objkeys[i]].replace('#','');
+  		}
+	});
+	console.log(filtered);
 	table.appendRows(filtered);
 	doneCallback();
       });
