@@ -98,7 +98,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 			var xmlDoc = this.responseXML;
 			console.log(xmlDoc);
 			//filter data for one specific tag
-			var tag1 = xmlDoc.getElementsByTagName("CD")[0].childnodes[0]; //enable this table name to be defined by user input
+			var tag1 = xmlDoc.getElementsByTagName("CD")[0].childNodes[0]; //enable this table name to be defined by user input
 			console.log(tag1);
 			//send only the data with this tagname to be converted into a table
 			window.cachedTableData = _xmlToTable(tag1);
