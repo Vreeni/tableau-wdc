@@ -253,8 +253,7 @@ function _determineType(primitive) {
 	   var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
     	   tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
     	   tableau.connectionData = JSON.stringify(conData);
-	   console.log(conData);
-    	   //tableau.submit(); 
+    	   tableau.submit(); 
 	   
         });
     });
