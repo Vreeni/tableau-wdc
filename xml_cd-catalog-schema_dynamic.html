@@ -215,7 +215,7 @@ function _findLongestArray(xmlElement, bestSoFar) {
 function _extractHeaders(rowData) {
   var toRet = {};
   var tableName_array = xmlDocument.getElementsByTagName("CD"); //enable this table name to be defined by user input
-  console.log(tableName_array);
+  console.log("Table name_array: " + tableName_array);
   for (var row = 0; row < rowData.length; ++row) {
     var rowLine = rowData[row];
     for (var key in rowLine) {
