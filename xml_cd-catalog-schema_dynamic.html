@@ -31,7 +31,7 @@
 		cols.push(singleCol);
              }
          }
-		   
+		  
         var tableSchema = {
             id: "XMLfeed",
             alias: "XML feed alias",
@@ -250,9 +250,9 @@ function _determineType(primitive) {
 	   console.log("Button submitUrl clicked");
 	   var xmlUrl = document.getElementById("inputURL");
            var xmlString = document.getElementById("inputText");
-	   //var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
+	   var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
 		
-	    var conData = {
+	    var conata = {
             "xmlUrl": $('#inputURL').val().trim(),
             "xmlString": $('#inputText').val().trim(),
             };
