@@ -77,8 +77,7 @@
   };
   tableau.registerConnector(myConnector);
 
-  	
-    //remove special chraacters in here already??
+ //retrieve the xml data either from a user entered url or as input as a pasted file - CURRENTLY: default URL to testfile as datasource 	
 function _retrieveXmlData(retrieveDataCallback) {
   if (!window.cachedTableData) {
     var conData = JSON.parse(tableau.connectionData);
@@ -94,15 +93,10 @@ function _retrieveXmlData(retrieveDataCallback) {
           	 }
 	};
 	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
-        xhttp.open('GET', proxyurl + 'https://www.w3schools.com/xml/cd_catalog.xml', true);
+        //Test url https://www.w3schools.com/xml/cd_catalog.xml
+	xhttp.open('GET', proxyurl + conData.xmlUrl, true);
 	xhttp.send();
-	    
-      /*var successCallback = function(data) {
-        window.cachedTableData = _xmlToTable(data);
-        retrieveDataCallback(window.cachedTableData);
-      };
-      _xmlHttpReq(conData.xmlUrl, successCallback);*/
-      return;
+        return;
     }
     try {
       var xmlDoc = $.parseXML(conData.xmlString);
@@ -232,14 +226,6 @@ function _determineType(primitive) {
 }
 	
 
-function _submitXMLToTableau(xmlString, xmlUrl) {
-    console.log("submitting xml to tableau");
-    var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
-    tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
-    tableau.connectionData = JSON.stringify(conData);
-    tableau.submit();  
-}
-
     /*
     // Create event listeners for when the user submits the input url or wants to use default test data
     $(document).ready(function() {
@@ -251,7 +237,8 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
 	    tableau.submit(); // This sends the connector object to Tableau
         });
     });
-    */
+	*/
+    
     
 
 	    
@@ -259,13 +246,13 @@ function _submitXMLToTableau(xmlString, xmlUrl) {
     $(document).ready(function() {
         $("#submitUrl").click(function() {
 	   console.log("Button submitUrl clicked");
-	   var xmlString = document.getElementById("inputURL");
-           var xmlUrl = document.getElementById("inputText");
+	   var xmlUrl = document.getElementById("inputURL");
+           var xmlString = document.getElementById("inputText");
 	  // _submitXMLToTableau(xmlString, xmlUrl);
-		var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
-    tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
-    tableau.connectionData = JSON.stringify(conData);
-    tableau.submit(); 
+	   var conData = {"xmlString" : xmlString, "xmlUrl": xmlUrl};
+    	   tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
+    	   tableau.connectionData = JSON.stringify(conData);
+    	   tableau.submit(); 
 	   
         });
     });
