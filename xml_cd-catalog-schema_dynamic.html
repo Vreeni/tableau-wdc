@@ -11,6 +11,10 @@
 (function() {
     // Create the connector object
     var myConnector = tableau.makeConnector();
+    myConnector.init = function () {
+       tableau.connectionName = 'XML data';
+       tableau.initCallback();
+    };
 	
     // Define the schema (right now is hardcoded > get dynamically?)
     myConnector.getSchema = function(schemaCallback) {
