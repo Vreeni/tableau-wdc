@@ -110,7 +110,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 	};
 	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
         //Test url https://www.w3schools.com/xml/cd_catalog.xml
-	xhttp.open('GET', proxyurl + 'https://sapdsm.sap.infineon.com:9007/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zbc_p2ops_read_projects/100/zbc_p2ops_read_projects_https/zbc_p2ops_bind_https?sap-client=100', true);
+	xhttp.open('GET', 'https://sapdsm.sap.infineon.com:9007/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zbc_p2ops_read_projects/100/zbc_p2ops_read_projects_https/zbc_p2ops_bind_https?sap-client=100', true);
 	xhttp.send();
         return;
     }
