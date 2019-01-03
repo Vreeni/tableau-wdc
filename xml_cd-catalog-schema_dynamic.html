@@ -102,7 +102,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 			console.log(tag1);
 			//send only the data with this tagname to be converted into a table ==> 
 			//not working cause only picks the first header name as well then
-			window.cachedTableData = _xmlToTable(xmlDoc);
+			window.cachedTableData = _xmlToTable(tag1);
 			retrieveDataCallback(window.cachedTableData);
           	 }
 	};
