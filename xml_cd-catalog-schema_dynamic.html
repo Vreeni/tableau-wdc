@@ -26,9 +26,10 @@
         for (var fieldName in headers) {
 		//if (
             if (headers.hasOwnProperty(fieldName)) {  
-		var fieldName_cleaned = fieldName.replace('#','');
+		var fieldName_cleaned1 = fieldName.replace('#','');
+		var fieldName_cleaned2 = fieldName_cleaned1.replace(':','');
 		var singleCol = {
-			id: fieldName_cleaned,
+			id: fieldName_cleaned2,
 			dataType: headers[fieldName]
 		}
 		cols.push(singleCol);
@@ -65,9 +66,10 @@
 	//loop through the array of objects to remove special characters (just as it was done with the headers)         
 	filtered.map(function(item) {
 		Object.keys(item).forEach(function(key) {
-  			var newkey = key.replace('#','');
-  			item[newkey] = item[key];
-			if (item[key] !== item[newkey]) {
+  			var newkey1 = key.replace('#','');
+			var newkey2 = newkey1.replace(':','');
+  			item[newkey2] = item[key];
+			if (item[key] !== item[newkey2]) {
   				delete item[key];
 			}
 		});  
