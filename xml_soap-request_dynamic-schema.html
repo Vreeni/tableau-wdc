@@ -116,8 +116,7 @@ function _retrieveXmlData(retrieveDataCallback) {
                 '</soapenv:Envelope>';
 
             xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4) {
-                    if (xmlhttp.status == 200) {	
+                if (this.readyState == 4 && this.status == 200) {	
 			//here the document is received in its original form => filter the correct tag name 
 			var xmlDoc = this.responseXML;
 			console.log(xmlDoc);
