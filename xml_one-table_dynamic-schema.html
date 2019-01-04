@@ -26,7 +26,7 @@
         for (var fieldName in headers) {
 		//if (
             if (headers.hasOwnProperty(fieldName)) {
-		var to_replace = { # : '', : : ' '};
+		var to_replace = ({ # : '', : : ' '});
 		var re = new RegExp(`[${ Object.keys(to_replace).join('') }]`,'g');
 		var res = fieldName.replace(re,(m => to_replace[m] ) );
 		//console.log(res)
