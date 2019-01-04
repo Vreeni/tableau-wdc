@@ -27,7 +27,7 @@
 		//if (
             if (headers.hasOwnProperty(fieldName)) {
 		var replaceChars={ "#":"" , ":":" " };
-		fieldName.replace(/#|_/g,function(match) {
+		fieldName.replace(/#|:/g,function(match) {
 			return replaceChars[match];
 		})
 		//console.log(res)
