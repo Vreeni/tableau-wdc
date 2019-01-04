@@ -97,7 +97,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 	const url = conData.xmlUrl;
 	//xml http request
             var xmlhttp = new XMLHttpRequest();
-	    //enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
+	    //enter pre-defined url or take it from user input
             xmlhttp.open('POST', proxyurl + 'https://www.w3.org/2003/05/soap-envelope/', true);
             // build SOAP request
             var sr =
