@@ -26,14 +26,15 @@
         for (var fieldName in headers) {
 		//if (
             if (headers.hasOwnProperty(fieldName)) {
-		var to_replace = ({ # : '', : : ' '});
-		var re = new RegExp(`[${ Object.keys(to_replace).join('') }]`,'g');
-		var res = fieldName.replace(re,(m => to_replace[m] ) );
+		var replaceChars={ "#":"" , ":":" " };
+		fieldName.replace(/#|_/g,function(match) {
+			return replaceChars[match];
+		})
 		//console.log(res)
 		//var fieldName_cleaned1 = fieldName.replace('#','');
 		//var fieldName_cleaned2 = fieldName_cleaned1.replace(':','');
 		var singleCol = {
-			id: res,
+			id: fieldName,
 			dataType: headers[fieldName]
 		}
 		cols.push(singleCol);
