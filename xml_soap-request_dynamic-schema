@@ -97,7 +97,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 	const url = conData.xmlUrl;
 	//xml http request
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open('POST', proxyurl + 'https://somesoapurl.com/', true);
+            xmlhttp.open('POST', proxyurl + 'https://www.w3.org/2003/05/soap-envelope/', true);
             // build SOAP request
             var sr =
                 '<?xml version="1.0" encoding="utf-8"?>' +
