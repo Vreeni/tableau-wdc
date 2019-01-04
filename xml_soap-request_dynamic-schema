@@ -1,0 +1,282 @@
+<html>
+<head>
+<title>XML Connector</title>
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>    
+    <script src="https://connectors.tableau.com/libs/tableauwdc-2.3.latest.js" type="text/javascript"></script>   
+    <script type="text/javascript">
+ 
+(function() {
+    // Create the connector object
+    var myConnector = tableau.makeConnector();
+    var input_url;
+    var input_text;
+
+	
+    // Define the schema (right now is hardcoded > get dynamically?)
+    myConnector.getSchema = function(schemaCallback) {
+        _retrieveXmlData(function (tableData) {
+        var headers = tableData.headers;
+	console.log(headers);
+	//in test file, a header named "text" was created that didnt have any row data. Could be deleted to clean up the table
+	//delete headers.text;
+	var cols = [];   
+        for (var fieldName in headers) {
+		//if (
+            if (headers.hasOwnProperty(fieldName)) {
+		var fieldName_cleaned = fieldName.replace(/#/g,'').replace(/:/g,'_');
+		//console.log(res)
+		//var fieldName_cleaned1 = fieldName.replace('#','');
+		//var fieldName_cleaned2 = fieldName_cleaned1.replace(':','');
+		var singleCol = {
+			id: fieldName_cleaned,
+			dataType: headers[fieldName]
+		}
+		cols.push(singleCol);
+             }
+         }
+		   
+        var tableSchema = {
+            id: "XMLfeed",
+            alias: "XML feed alias",
+            columns: cols
+        };
+	console.log(cols);
+        schemaCallback([tableSchema]);
+       });
+    };
+	
+	    
+
+	
+// Get the data from default link/file ==> tbd: get data from input Url
+ myConnector.getData = function(table, doneCallback) {
+      _retrieveXmlData(function (tableData) {
+	var rowData = tableData.rowData;
+	//loop through the array of objects to remove objects that are null
+        filtered = rowData.filter(function (a) {
+        	var temp = Object.keys(a).map(function (k) { return a[k]; }),
+           		 k = temp.join('|');
+       		if (!this[k] && temp.join('')) {
+            		this[k] = true;
+            		return true;
+        	}
+    	}, Object.create(null));
+	//console.log(filtered);
+	//loop through the array of objects to remove special characters (just as it was done with the headers)         
+	filtered.map(function(item) {
+		Object.keys(item).forEach(function(key) {
+  			var newkey1 = key.replace('#','');
+			var newkey2 = newkey1.replace(':','');
+  			item[newkey2] = item[key];
+			if (item[key] !== item[newkey2]) {
+  				delete item[key];
+			}
+		});  
+		
+	});
+	console.log(filtered);
+	table.appendRows(filtered);
+	doneCallback();
+      });
+  };
+  tableau.registerConnector(myConnector);
+
+ //retrieve the xml data either from a user entered url or as input as a pasted file - CURRENTLY: default URL to testfile as datasource 	
+function _retrieveXmlData(retrieveDataCallback) {
+  if (!window.cachedTableData) {
+    var conData = JSON.parse(tableau.connectionData);
+    var tableName = conData.tableName;
+    console.log(tableName);
+    var xmlString = conData.xmlString;
+    if (conData.xmlUrl) {
+	console.log(conData.xmlUrl);
+	const proxyurl = "https://cors-anywhere.herokuapp.com/";
+	const url = conData.xmlUrl;
+        var xhttp = new XMLHttpRequest();
+    	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			//here the document is received in its original form => filter the correct tag name 
+			var xmlDoc = this.responseXML;
+			console.log(xmlDoc);
+			//filter data for one specific tag 
+			var root = xmlDoc.documentElement; //enable this table name to be defined by user input
+			console.log(root);
+			var tag1 = root.childNodes[0];
+			console.log(tag1);
+			//send only the data with this tagname to be converted into a table ==> 
+			//not working cause only picks the first header name as well then
+			window.cachedTableData = _xmlToTable(root);
+			retrieveDataCallback(window.cachedTableData);
+          	 }
+	};
+	//enter pre-defined url or take it from user input, but then have to figure out how to dynamically get the schema (right now is hardcoded)
+        //Test url https://www.w3schools.com/xml/cd_catalog.xml
+	xhttp.open('GET', proxyurl +
+		   //'https://www.w3.org/2003/05/soap-envelope/', 
+		   'https://www.w3.org/2003/05/soap-envelope/',
+		    true);
+	xhttp.send();
+        return;
+    }
+    try {
+      var xmlDoc = $.parseXML(conData.xmlString);
+      window.cachedTableData = _xmlToTable(xmlDoc);
+    }
+    catch (e) {
+      tableau.abortWithError("unable to parse xml data");
+      return;
+    } 
+  }
+  retrieveDataCallback(window.cachedTableData);
+}
+	    
+	   
+// Takes a hierarchical xml document and tries to turn it into a table
+// Returns an object with headers and the row level data
+function _xmlToTable(xmlDocument) {
+  var rowData = _flattenData(xmlDocument);
+  var headers = _extractHeaders(rowData);
+  var tableName = "TableXY"; //enable this table name to be defined by user input
+  return {"headers": headers, "rowData":rowData, "xml_raw": xmlDocument};
+}
+// Given an object:
+//   - finds the longest array in the xml
+//   - flattens each element in that array so it is a single element with many properties
+// If there is no array that is a descendent of the original object, this wraps
+function _flattenData(xmlDocument) {
+  // first find the longest array
+  var longestArray = _findLongestArray(xmlDocument, xmlDocument);
+  if (!longestArray || longestArray.length == 0) {
+    // if no array found, just wrap the entire object blob in an array
+    longestArray = [objectBlob];
+  }
+  toRet = [];
+  for (var ii = 0; ii < longestArray.childNodes.length; ++ii) {
+    toRet[ii] = _flattenObject(longestArray.childNodes[ii]);
+  }
+  return toRet;
+}
+// Given an element with hierarchical properties, flattens it so all the properties
+// sit on the base element.
+function _flattenObject(xmlElt) {
+  var toRet = {};
+  if (xmlElt.attributes)
+  {
+    for (var attributeNum = 0; attributeNum < xmlElt.attributes.length; ++attributeNum) {
+      var attribute = xmlElt.attributes[attributeNum];
+      toRet[attribute.nodeName] = attribute.nodeValue;
+    }
+  }
+  
+  var children = xmlElt.childNodes;
+  if (!children || !children.length) {
+    if (xmlElt.textContent) {
+      toRet.text = xmlElt.textContent.trim();
+    }
+  } else {  
+  	for (var childNum = 0; childNum < children.length; ++childNum) {
+  	  var child = xmlElt.childNodes[childNum];
+  	  var childName = child.nodeName;
+  	  var subObj = _flattenObject(child);
+  	  for (var k in subObj) {
+  	    if (subObj.hasOwnProperty(k)) {
+  		    toRet[childName + '_' + k] = subObj[k];
+  	    }
+    	}
+  	}
+  }
+  return toRet;
+}
+// Finds the longest array that is a descendent of the given object
+function _findLongestArray(xmlElement, bestSoFar) {
+  var children = xmlElement.childNodes;
+  if (children && children.length) {
+    if (children.length > bestSoFar.childNodes.length) {
+      bestSoFar = xmlElement;
+    }
+    for (var childNum in children) {
+      var subBest = _findLongestArray(children[childNum], bestSoFar);
+      if (subBest.childNodes.length > bestSoFar.childNodes.length) {
+        bestSoFar = subBest;
+      }
+    }
+  }
+  return bestSoFar;
+}
+// Given an array of js objects, returns a map from data column name to data type
+function _extractHeaders(rowData) {
+  var toRet = {};
+  //var tableName_array = rowData.getElementsByTagName("CD"); //enable this table name to be defined by user input
+  //console.log("Table name_array: " + tableName_array);
+  for (var row = 0; row < rowData.length; ++row) {
+    var rowLine = rowData[row];
+    for (var key in rowLine) {
+      if (rowLine.hasOwnProperty(key)) {
+        if (!(key in toRet)) {
+          toRet[key] = _determineType(rowLine[key]);
+        }
+      }
+    }
+  }
+  return toRet;
+}
+// Given a primitive, tries to make a guess at the data type of the input
+function _determineType(primitive) {
+  // possible types: 'float', 'date', 'datetime', 'bool', 'string', 'int'
+  if (parseInt(primitive) == primitive) return 'int';
+  if (parseFloat(primitive) == primitive) return 'float';
+  if (isFinite(new Date(primitive).getTime())) return 'datetime';
+  return 'string';
+}
+	    
+    
+    $(document).ready(function() {
+        $("#submitUrl").click(function() {
+	   console.log("Button submitUrl clicked");
+	   var xmlUrl = document.getElementById("xmlUrl").value;
+           var xmlString = document.getElementById("xmlText").value;
+	   var tableName = "CD";
+	   var conData = {"tableName": tableName, "xmlString" : xmlString, "xmlUrl": xmlUrl};
+		
+	    /*var conData = {
+            'xmlUrl':  $('xmlUrl').val().trim(),
+            'xmlString': $('xmlText').val().trim();
+            };*/
+		
+	   tableau.log("conData: " + conData);
+    	   tableau.connectionData = JSON.stringify(conData);
+	   tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
+		//tableau.user
+    	   tableau.submit(); 
+	   
+        });
+    });
+         
+   })();
+  </script>
+
+</head>
+
+
+<body>
+
+ <div class="container container-table">
+        <div class="row vertical-center-row">
+           <div class="text-center col-md-4 col-md-offset-4">
+
+<p id = "descriptionUrl">Enter URL to XML file</p>
+<input id='xmlUrl'>
+<button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit URL</button>
+  <br>
+<p id = "descriptionText">Paste XML file</p>
+<textarea id='xmlText' rows="10" cols="70"></textarea>
+<button type = "button" id = "submitText" class = "btn btn-success" style = "margin: 10px;">Submit file</button>
+  </div>
+ </div>
+</div>
+
+</body>	
+</html>
