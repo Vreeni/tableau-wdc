@@ -90,15 +90,15 @@ function _retrieveXmlData(retrieveDataCallback) {
     var conData = JSON.parse(tableau.connectionData);
     var tableName = conData.tableName;
     console.log(tableName);
-    var xmlString = conData.xmlString;
+    //var xmlString = conData.xmlString;
     if (conData.xmlUrl) {
 	console.log(conData.xmlUrl);
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
-	const url = conData.xmlUrl;
+	var url = conData.xmlUrl; //use the url that the user entered instead of a default one
 	//xml http request
             var xmlhttp = new XMLHttpRequest();
-	    //enter pre-defined url or take it from user input
-            xmlhttp.open('GET', proxyurl + 'https://sapdsm.sap.infineon.com:9007/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zbc_p2ops_read_projects/100/zbc_p2ops_read_projects_https/zbc_p2ops_bind_https?sap-client=100', true);
+	    //enter default url or take it from user input (const url)
+            xmlhttp.open('GET', proxyurl + 'https://www.enter-a-url-com', true);
             // build SOAP request
             var sr =
                 '<?xml version="1.0" encoding="utf-8"?>' +
@@ -136,14 +136,14 @@ function _retrieveXmlData(retrieveDataCallback) {
         xmlhttp.send(sr);
       	return;
     }
-    try {
+    /*try {
       var xmlDoc = $.parseXML(conData.xmlString);
       window.cachedTableData = _xmlToTable(xmlDoc);
     }
     catch (e) {
       tableau.abortWithError("unable to parse xml data");
       return;
-    } 
+    } */
   }
   retrieveDataCallback(window.cachedTableData);
 }
@@ -252,9 +252,9 @@ function _determineType(primitive) {
         $("#submitUrl").click(function() {
 	   console.log("Button submitUrl clicked");
 	   var xmlUrl = document.getElementById("xmlUrl").value;
-           var xmlString = document.getElementById("xmlText").value;
-	   var tableName = "CD";
-	   var conData = {"tableName": tableName, "xmlString" : xmlString, "xmlUrl": xmlUrl};
+           //var xmlString = document.getElementById("xmlText").value;
+	   var tableName = "Some table name";
+	   var conData = {"tableName": tableName, /*"xmlString" : xmlString,*/ "xmlUrl": xmlUrl};
 		
 	    /*var conData = {
             'xmlUrl':  $('xmlUrl').val().trim(),
@@ -283,12 +283,14 @@ function _determineType(primitive) {
            <div class="text-center col-md-4 col-md-offset-4">
 
 <p id = "descriptionUrl">Enter URL to XML file</p>
-<input id='xmlUrl'>
+<input id='xmlUrl' required>
 <button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit URL</button>
   <br>
+<!--
 <p id = "descriptionText">Paste XML file</p>
 <textarea id='xmlText' rows="10" cols="70"></textarea>
 <button type = "button" id = "submitText" class = "btn btn-success" style = "margin: 10px;">Submit file</button>
+-->
   </div>
  </div>
 </div>
