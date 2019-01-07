@@ -61,7 +61,7 @@
             		return true;
         	}
     	}, Object.create(null));
-	//console.log(filtered);
+	console.log(filtered);
 
 	//loop through the array of objects to remove special characters (just as it was done with the headers)         
 	var filtered2 = filtered.map(function(item) {
@@ -76,7 +76,7 @@
 		
 	});
 	console.log(filtered2);
-	table.appendRows(filtered2);
+	table.appendRows(filtered);
 	doneCallback();
       });
   };
