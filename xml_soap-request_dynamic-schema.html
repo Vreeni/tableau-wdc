@@ -63,7 +63,12 @@
     	}, Object.create(null));
 	console.log(filtered);
 
-	//loop through the array of objects to remove special characters (just as it was done with the headers)         
+	//loop through the array of objects to remove special characters (just as it was done with the headers)  
+	filtered = filtered.map(obj => replaceKeys(obj, /_/g, ''));
+	filtered = filtered.map(obj => replaceKeys(obj, /:/g, ''));
+	console.log(filtered);      
+	      
+	/*
 	var filtered2 = filtered.map(function(item) {
 		Object.keys(item).forEach(function(key) {
   			var newkey1 = key.replace('#','');
@@ -76,6 +81,7 @@
 		
 	});
 	console.log(filtered2);
+	*/
 	table.appendRows(filtered);
 	doneCallback();
       });
