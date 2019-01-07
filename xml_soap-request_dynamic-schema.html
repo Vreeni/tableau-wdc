@@ -136,14 +136,14 @@ function _retrieveXmlData(retrieveDataCallback) {
         xmlhttp.send(sr);
       	return;
     }
-    /*try {
-      var xmlDoc = $.parseXML(conData.xmlString);
+    try {
+      var xmlDoc = $.parseXML(conData.xmlText);
       window.cachedTableData = _xmlToTable(xmlDoc);
     }
     catch (e) {
       tableau.abortWithError("unable to parse xml data");
       return;
-    } */
+    } 
   }
   retrieveDataCallback(window.cachedTableData);
 }
@@ -267,6 +267,7 @@ function _determineType(primitive) {
 	   var xmlUrl = document.getElementById("xmlUrl").value;
            //var xmlString = document.getElementById("xmlText").value;
 	   var tableName = "Some table name";
+	   //check if the user has entered a valid URL - if not, abort with error	
 	   if (is_url(xmlUrl))  {
 	  	var conData = {"tableName": tableName, /*"xmlString" : xmlString,*/ "xmlUrl": xmlUrl};
 	  	tableau.log("conData: " + conData);
@@ -280,6 +281,22 @@ function _determineType(primitive) {
   		}
         });
     });
+	
+    
+    $(document).ready(function() {
+        $("#submitText").click(function() {
+	  console.log("Button submitText clicked");
+	  var xmlText = document.getElementById("xmlText").value;
+	  var tableName = "Some table name";
+	  var conData = {"tableName": tableName, /*"xmlString" : xmlString,*/ "xmlText": xmlText};
+	  tableau.log("conData: " + conData);
+    	  tableau.connectionData = JSON.stringify(conData);
+	  tableau.connectionName = "XML data: "; // This will be the data source name in Tableau
+	//tableau.user
+    	  tableau.submit(); 
+        });
+    });	
+	
          
    })();
   </script>
@@ -297,11 +314,10 @@ function _determineType(primitive) {
 <input id='xmlUrl' required>
 <button type = "button" id = "submitUrl" class = "btn btn-success" style = "margin: 10px;">Submit URL</button>
   <br>
-<!--
 <p id = "descriptionText">Paste XML file</p>
 <textarea id='xmlText' rows="10" cols="70"></textarea>
 <button type = "button" id = "submitText" class = "btn btn-success" style = "margin: 10px;">Submit file</button>
--->
+
   </div>
  </div>
 </div>
