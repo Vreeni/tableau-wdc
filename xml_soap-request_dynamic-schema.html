@@ -65,6 +65,16 @@
         	}
     	}, Object.create(null));
 	//console.log(filtered);
+	//loop through the array of objects to remove objects that are null
+        filtered2 = rowData.filter(function (a) {
+        	var temp = Object.keys(a).map(function (k) { return a[k]; }),
+           		 k = temp.join('|');
+       		if (!this[k] && temp.join('#')) {
+            		this[k] = true;
+            		return true;
+        	}
+    	}, Object.create(null));
+	console.log(filtered2);
 	//loop through the array of objects to remove special characters (just as it was done with the headers)         
 	filtered.map(function(item) {
 		Object.keys(item).forEach(function(key) {
@@ -77,7 +87,7 @@
 		});  
 		
 	});
-	console.log(filtered);
+	//console.log(filtered2);
 	table.appendRows(filtered);
 	doneCallback();
       });
