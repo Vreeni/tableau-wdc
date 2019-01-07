@@ -24,12 +24,9 @@
 	//delete headers.text;
 	var cols = [];   
         for (var fieldName in headers) {
-		//if (
             if (headers.hasOwnProperty(fieldName)) {
+		//remove special characters in headers    
 		var fieldName_cleaned = fieldName.replace(/#/g,'').replace(/:/g,'');
-		//console.log(res)
-		//var fieldName_cleaned1 = fieldName.replace('#','');
-		//var fieldName_cleaned2 = fieldName_cleaned1.replace(':','');
 		var singleCol = {
 			id: fieldName_cleaned,
 			dataType: headers[fieldName]
@@ -79,7 +76,7 @@
 		
 	});
 	console.log(filtered2);
-	table.appendRows(filtered);
+	table.appendRows(filtered2);
 	doneCallback();
       });
   };
