@@ -133,8 +133,9 @@ function _retrieveXmlData(retrieveDataCallback) {
 			//filter data for one specific tag 
 			var root = xmlDoc.documentElement; //enable this table name to be defined by user input
 			console.log(root);
-			var tag1 = root.childNodes[0];
-			console.log(tag1);
+			console.log(this.responseText);
+			//var tag1 = root.childNodes[0];
+			//console.log(tag1);
 			//send only the data with this tagname to be converted into a table ==> 
 			//not working cause only picks the first header name as well then
 			window.cachedTableData = _xmlToTable(root);
