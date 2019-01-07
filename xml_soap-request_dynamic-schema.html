@@ -102,7 +102,16 @@ function _retrieveXmlData(retrieveDataCallback) {
             // build SOAP request
             var sr =
                 '<?xml version="1.0" encoding="utf-8"?>' +
-                '<soapenv:Envelope ' + 
+		'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/">' +
+   		'<soapenv:Header/' +
+   		'<soapenv:Body>' +
+    		  '<web:NumberToWords>'+
+      		   '<web:ubiNum>56</web:ubiNum>'+
+   		   '</web:NumberToWords>'+
+		   '</soapenv:Body>'+
+		'</soapenv:Envelope>'
+                /*
+		'<soapenv:Envelope ' + 
                     'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
                     'xmlns:api="http://127.0.0.1/Integrics/Enswitch/API" ' +
                     'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
@@ -114,6 +123,7 @@ function _retrieveXmlData(retrieveDataCallback) {
                         '</api:some_api_call>' +
                     '</soapenv:Body>' +
                 '</soapenv:Envelope>';
+		*/
 
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {	
