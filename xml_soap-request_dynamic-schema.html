@@ -88,6 +88,15 @@
   };
   tableau.registerConnector(myConnector);
 
+	
+	
+function replaceKeys(obj, find, replace) {
+  return Object.keys(obj).reduce (
+    (acc, key) => Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {});
+}
+  	
+	
+	
  //retrieve the xml data either from a user entered url or as input as a pasted file - CURRENTLY: default URL to testfile as datasource 	
 function _retrieveXmlData(retrieveDataCallback) {
   if (!window.cachedTableData) {
