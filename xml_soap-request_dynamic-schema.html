@@ -84,8 +84,9 @@
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
     function(acc, key) {
-	return Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {});
-    }
+	return Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {}
+    });
+    
 }
  
 /*
