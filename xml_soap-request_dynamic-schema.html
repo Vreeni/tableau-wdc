@@ -87,7 +87,7 @@ function replaceKeys(obj, find, replace) {
 	var objkeys = Object.keys(obj);
 	var objresult = {};
 	for (i=0; i<objkeys.length; i+=1) {
-		objresult[keys[i]] = obj[keys[i]].replace(find,replace);
+		objresult[objkeys[i]] = obj[objkeys[i]].replace(find,replace);
 	}
 	return Object.assign(acc, { objresult : obj[key]}), {}
     }); 
