@@ -62,11 +62,11 @@
 
 	//loop through the array of objects to remove special characters (just as it was done with the headers)  
           filtered = filtered.map(function(obj) {
-                  return replaceKeys(obj, /#/g, ''));
-           }
+                  return replaceKeys(obj, /#/g, '');
+           });
           filtered = filtered.map(function(obj) {
-                  return replaceKeys(obj, /:/g, ''));
-           }
+                  return replaceKeys(obj, /:/g, '');
+           });
 	//filtered = filtered.map(obj => replaceKeys(obj, /#/g, ''));
 	//filtered = filtered.map(obj => replaceKeys(obj, /:/g, ''));
 	console.log(filtered);      
