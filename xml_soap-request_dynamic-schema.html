@@ -48,7 +48,7 @@
 	    
 
 	
-// Get the data from default link/file ==> tbd: get data from input Url
+// Get the data from an url or as pasted text
  myConnector.getData = function(table, doneCallback) {
       _retrieveXmlData(function (tableData) {
 	var rowData = tableData.rowData;
@@ -67,21 +67,8 @@
 	filtered = filtered.map(obj => replaceKeys(obj, /#/g, ''));
 	filtered = filtered.map(obj => replaceKeys(obj, /:/g, ''));
 	console.log(filtered);      
-	      
-	/*
-	var filtered2 = filtered.map(function(item) {
-		Object.keys(item).forEach(function(key) {
-  			var newkey1 = key.replace('#','');
-			var newkey2 = newkey1.replace(':','');
-  			item[newkey2] = item[key];
-			if (item[key] !== item[newkey2]) {
-  				delete item[key];
-			}
-		});  
-		
-	});
-	console.log(filtered2);
-	*/
+	
+	 //add the rows to the table
 	table.appendRows(filtered);
 	doneCallback();
       });
@@ -89,13 +76,12 @@
   tableau.registerConnector(myConnector);
 
 	
-	
+//function to replace special characters in object keys within the array of table row data	
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
     (acc, key) => Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {});
 }
-  	
-	
+  		
 	
  //retrieve the xml data either from a user entered url or as input as a pasted file - CURRENTLY: default URL to testfile as datasource 	
 function _retrieveXmlData(retrieveDataCallback) {
@@ -110,34 +96,19 @@ function _retrieveXmlData(retrieveDataCallback) {
 	var url = conData.xmlUrl; //use the url that the user entered instead of a default one
 	//xml http request
             var xmlhttp = new XMLHttpRequest();
-	    //enter default url or take it from user input (const url)
+	    //enter default url or take it from user input (const url) ||| CURRENTLY: Test URL + Test Request
             xmlhttp.open('POST', proxyurl + 'http://www.dataaccess.com/webservicesserver/numberconversion.wso?WSDL', true);
             // build SOAP request
             var sr =
                 '<?xml version="1.0" encoding="utf-8"?>' +
 		'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/">' +
    		'<soapenv:Header/>' +
-   		'<soapenv:Body>' +
-       		'<web:NumberToDollars>'+
-         	'<web:dNum>5</web:dNum>'+
-     		'</web:NumberToDollars>'+
-		 '</soapenv:Body>'+
+   		    '<soapenv:Body>' +
+       			'<web:NumberToDollars>'+  
+			    '<web:dNum>5</web:dNum>'+
+     			'</web:NumberToDollars>'+
+		   '</soapenv:Body>'+
 		'</soapenv:Envelope>'
-                /*
-		'<soapenv:Envelope ' + 
-                    'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
-                    'xmlns:api="http://127.0.0.1/Integrics/Enswitch/API" ' +
-                    'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
-                    'xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">' +
-                    '<soapenv:Body>' +
-                        '<api:some_api_call soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
-                            '<username xsi:type="xsd:string">login_username</username>' +
-                            '<password xsi:type="xsd:string">password</password>' +
-                        '</api:some_api_call>' +
-                    '</soapenv:Body>' +
-                '</soapenv:Envelope>';
-		*/
-
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {	
 			//here the document is received in its original form => filter the correct tag name 
