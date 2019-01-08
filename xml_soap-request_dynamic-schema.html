@@ -11,9 +11,6 @@
 (function() {
     // Create the connector object
     var myConnector = tableau.makeConnector();
-    var input_url;
-    var input_text;
-
 	
     // Define the schema (right now is hardcoded > get dynamically?)
     myConnector.getSchema = function(schemaCallback) {
@@ -255,7 +252,7 @@ function _determineType(primitive) {
   return 'string';
 }
 	    
-    
+    //handle button click when user submits a URL
     $(document).ready(function() {
         $("#submitUrl").click(function() {
 	   console.log("Button submitUrl clicked");
@@ -277,7 +274,7 @@ function _determineType(primitive) {
         });
     });
 	
-    
+    //handle button click when user submits text ||| think about field where username pw can be entered?
     $(document).ready(function() {
         $("#submitText").click(function() {
 	  console.log("Button submitText clicked");
@@ -291,8 +288,7 @@ function _determineType(primitive) {
     	  tableau.submit(); 
         });
     });	
-	
-         
+	    
    })();
   </script>
 
