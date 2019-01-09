@@ -66,8 +66,8 @@
 		//remove special characters in headers    
 		var newKey= arrayOfKeys[i].replace(/#/g,'').replace(/:/g,'');
 		console.log(newKey);
-    		var mem = filtered[key];
-    		delete filtered[key];
+    		var mem = filtered[arrayOfKeys[i]];
+    		delete filtered[arrayOfKeys[i]];
     		filtered[newKey] = mem;
 		console.log(filtered[newKey]);
  	}
