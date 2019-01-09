@@ -62,10 +62,10 @@
 
 	//loop through the array of objects to remove special characters (just as it was done with the headers)  
         //  filtered = filtered.map(function(obj) {
-		var keys = Object.keys(obj);	   
+		var keys = Object.keys(fitlered);	   
 		for (var j=0; j < keys.length; j++) {
   			 var key = keys[j].replace(/:/g, "").replace(/#/g, "");  
-  			 tmp[key] = ojb[keys[j]];
+  			 tmp[key] = filtered[keys[j]];
 		         keys.push(tmp[key]);
 
 		}
