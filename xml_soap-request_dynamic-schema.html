@@ -112,7 +112,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 	//xml http request
             var xmlhttp = new XMLHttpRequest();
 	    //enter default url or take it from user input (const url) ||| CURRENTLY: Test URL + Test Request
-            xmlhttp.open('POST', proxyurl + 'http://www.dataaccess.com/webservicesserver/numberconversion.wso?WSDL', true);
+            xmlhttp.open('POST', proxyurl + url, true);
             // build SOAP request
             var sr =
                 '<?xml version="1.0" encoding="utf-8"?>' +
