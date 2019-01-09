@@ -61,12 +61,19 @@
 	console.log(filtered);
 
 	//loop through the array of objects to remove special characters (just as it was done with the headers)  
+        //  filtered = filtered.map(function(obj) {
+		var keys = Object.keys(obj);	   
+		for (var j=0; j < keys.length; j++) {
+  			 var key = keys[j].replace(/:/g, "").replace(/#/g, "");  
+  			 tmp[key] = ojb[keys[j]];
+		         keys.push(tmp[key]);
+
+		}
+                  //return replaceKeys(obj, /#/g, '');
+          // //});
           filtered = filtered.map(function(obj) {
-                  return replaceKeys(obj, /#/g, '');
-           });
-          filtered = filtered.map(function(obj) {
-                  return replaceKeys(obj, /:/g, '');
-           });
+          //        return replaceKeys(obj, /:/g, '');
+          // });
 	// WDC doesnt work in Tableau Desktop when using arrow functions 
 	//filtered = filtered.map(obj => replaceKeys(obj, /#/g, ''));
 	//filtered = filtered.map(obj => replaceKeys(obj, /:/g, ''));
@@ -84,11 +91,23 @@
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
     function(acc, key) {
+	 var cleanedObj = {};
+	  for (var prop in obj) {
+	 	if (obj.hasOwnProperty(prop)) {
+			key.replace(find,replace)]
+			cleanedObj[prop] = obj[prop];
+		}
+	  }
 	return Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {}
     }); 
 }
-	
-	
+
+var keys = Object.keys(obj);
+for (var j=0; j < keys.length; j++) {
+   var key = keys[j].replace(/:/g, "").replace(/#/g, "");  
+   tmp[key] = ojb[keys[j]];
+}
+
  
 /*
 function replaceKeys(obj, find, replace) {
