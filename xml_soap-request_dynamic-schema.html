@@ -62,7 +62,7 @@
 
 	//loop through the array of objects to remove special characters (just as it was done with the headers)  
 	var arrayOfKeys = Object.keys(filtered);
-	for (var key in arrayOfKeys.length){
+	for (var key in arrayOfKeys){
 		//remove special characters in headers    
 		var newKey= key.replace(/#/g,'').replace(/:/g,'');
     		var mem = filtered[key];
