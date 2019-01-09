@@ -65,7 +65,8 @@
 		var keys = Object.keys(filtered);	   
 		for (var j=0; j < keys.length; j++) {
   			 var key = keys[j].replace(/:/g, "").replace(/#/g, "");  
-  			 tmp[key] = filtered[keys[j]];
+  			var tmp = {}; 
+			tmp[key] = filtered[keys[j]];
 		         keys.push(tmp[key]);
 
 		}
