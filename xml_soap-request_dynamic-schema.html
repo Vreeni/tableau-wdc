@@ -71,16 +71,16 @@
 		}
                   //return replaceKeys(obj, /#/g, '');
           // //});
-          filtered = filtered.map(function(obj) {
+         // filtered = filtered.map(function(obj) {
           //        return replaceKeys(obj, /:/g, '');
           // });
 	// WDC doesnt work in Tableau Desktop when using arrow functions 
 	//filtered = filtered.map(obj => replaceKeys(obj, /#/g, ''));
 	//filtered = filtered.map(obj => replaceKeys(obj, /:/g, ''));
-	console.log(filtered);      
+	//console.log(filtered);      
 	
 	 //add the rows to the table
-	table.appendRows(filtered);
+	table.appendRows(keys);
 	doneCallback();
       });
   };
