@@ -112,7 +112,7 @@ function _retrieveXmlData(retrieveDataCallback) {
 	//xml http request
             var xmlhttp = new XMLHttpRequest();
 	    //enter default url or take it from user input (const url) ||| CURRENTLY: Test URL + Test Request
-            xmlhttp.open('POST',  'https://sapdsm.sap.infineon.com:9007/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zbc_p2ops_read_projects/100/zbc_p2ops_read_projects_https/zbc_p2ops_bind_https?sap-client=100', true);
+            xmlhttp.open('POST', proxyurl + 'https://sapdsm.sap.infineon.com:9007/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zbc_p2ops_read_projects/100/zbc_p2ops_read_projects_https/zbc_p2ops_bind_https?sap-client=100', true);
             // build SOAP request
             var sr =
                 '<?xml version="1.0" encoding="utf-8"?>' +
