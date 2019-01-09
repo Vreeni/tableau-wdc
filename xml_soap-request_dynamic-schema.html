@@ -89,7 +89,7 @@ function replaceKeys(obj, find, replace) {
 }
 */	
 	
-  
+ 
 
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
@@ -112,11 +112,11 @@ function _retrieveXmlData(retrieveDataCallback) {
 	//xml http request
             var xmlhttp = new XMLHttpRequest();
 	    //enter default url or take it from user input (const url) ||| CURRENTLY: Test URL + Test Request
-            xmlhttp.open('POST', proxyurl + 'https://www.dataaccess.com/webservicesserver/numberconversion.wso?WSDL' , true);
+            xmlhttp.open('POST', proxyurl + 'http://www.dataaccess.com/webservicesserver/numberconversion.wso?WSDL', true);
             // build SOAP request
             var sr =
                 '<?xml version="1.0" encoding="utf-8"?>' +
-		'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/numberconversion.wso?WSDL">' +
+		'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/">' +
    		'<soapenv:Header/>' +
    		    '<soapenv:Body>' +
        			'<web:NumberToDollars>'+  
