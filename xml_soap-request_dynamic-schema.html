@@ -61,8 +61,26 @@
 	console.log(filtered);
 
 	//loop through the array of objects to remove special characters (just as it was done with the headers)  
-        //  filtered = filtered.map(function(obj) {
-	      var keys = Object.keys(filtered);
+        filtered = filtered.map(function(obj) {
+		return replaceKeys(obj, /#/g, '');
+         });
+        filtered = filtered.map(function(obj) {
+                return replaceKeys(obj, /:/g, '');
+        });
+	// WDC doesnt work in Tableau Desktop when using arrow functions 
+	//filtered = filtered.map(obj => replaceKeys(obj, /#/g, ''));
+	//filtered = filtered.map(obj => replaceKeys(obj, /:/g, ''));
+	console.log(filtered);      
+	
+	//add the rows to the table
+	table.appendRows(keys);
+	doneCallback();
+      });
+  };
+  tableau.registerConnector(myConnector);
+
+	/*
+	 var keys = Object.keys(filtered);
 	      console.log(keys);
 	      for (var j=0; j < keys.length; j++) {
 		   var key = keys[j].replace(/#/g,'').replace(/:/g,'');
@@ -71,23 +89,7 @@
 		         keys.push(tmp[key]);
 
 	      }
-                  //return replaceKeys(obj, /#/g, '');
-          // //});
-         // filtered = filtered.map(function(obj) {
-          //        return replaceKeys(obj, /:/g, '');
-          // });
-	// WDC doesnt work in Tableau Desktop when using arrow functions 
-	//filtered = filtered.map(obj => replaceKeys(obj, /#/g, ''));
-	//filtered = filtered.map(obj => replaceKeys(obj, /:/g, ''));
-	//console.log(filtered);      
-	
-	 //add the rows to the table
-	table.appendRows(keys);
-	doneCallback();
-      });
-  };
-  tableau.registerConnector(myConnector);
-
+	*/
 	
 //function to replace special characters in object keys within the array of table row data	
 function replaceKeys(obj, find, replace) {
