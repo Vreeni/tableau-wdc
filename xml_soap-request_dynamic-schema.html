@@ -61,12 +61,24 @@
 	console.log(filtered);
 
 	//loop through the array of objects to remove special characters (just as it was done with the headers)  
-        filtered = filtered.map(function(obj) {
+	var arrayOfKeys = Object.keys(filtered);
+	for (var key in arrayOfKeys.length){
+		//remove special characters in headers    
+		var newKey= key.replace(/#/g,'').replace(/:/g,'');
+    		var mem = filtered[key];
+    		delete filtered[key];
+    		filtered[newKey] = mem;
+		console.log(filtered[newKey];
+ 	}
+		
+	/*      
+	filtered = filtered.map(function(obj) {
 		return replaceKeys(obj, /#/g, '');
          });
         filtered = filtered.map(function(obj) {
                 return replaceKeys(obj, /:/g, '');
         });
+	*/
 	// WDC doesnt work in Tableau Desktop when using arrow functions 
 	//filtered = filtered.map(obj => replaceKeys(obj, /#/g, ''));
 	//filtered = filtered.map(obj => replaceKeys(obj, /:/g, ''));
@@ -90,7 +102,6 @@
 
 	      }
 	*/
-	
 //function to replace special characters in object keys within the array of table row data	
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
@@ -98,8 +109,8 @@ function replaceKeys(obj, find, replace) {
 	return Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {}
     }); 
 }
-
-
+	
+	
  
 
 function replaceKeys(obj, find, replace) {
