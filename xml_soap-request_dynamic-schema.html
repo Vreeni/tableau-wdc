@@ -90,23 +90,11 @@
 //function to replace special characters in object keys within the array of table row data	
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
-    function(acc, key) {
-	 var cleanedObj = {};
-	  for (var prop in obj) {
-	 	if (obj.hasOwnProperty(prop)) {
-			key.replace(find,replace)]
-			cleanedObj[prop] = obj[prop];
-		}
-	  }
+    function(acc, key) {	  
 	return Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {}
     }); 
 }
 
-var keys = Object.keys(obj);
-for (var j=0; j < keys.length; j++) {
-   var key = keys[j].replace(/:/g, "").replace(/#/g, "");  
-   tmp[key] = ojb[keys[j]];
-}
 
  
 /*
