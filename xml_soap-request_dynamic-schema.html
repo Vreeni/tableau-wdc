@@ -60,22 +60,7 @@
     	}, Object.create(null));
 	console.log(filtered);
 
-	//loop through the array of objects to remove special characters (just as it was done with the headers)   
-	      var keys = Object.keys(filtered);
-	      console.log(keys);
-	      for (var j=0; j < keys.length; j++) {
-	      	var prop = keys[j];
-		for (i=0; i<prop.length; i++) {
-		   var prop = prop[j].replace(/#/g,'').replace(/:/g,'');
-  		   var tmp = {}; 
-		   tmp[prop] = filtered[keys[j]];
-		   keys.push(tmp[prop]);
-		 }
-	      }   
-	      console.log(keys);
-	      console.log(filtered);
-	      
-	      
+	//loop through the array of objects to remove special characters (just as it was done with the headers)         	      
 	filtered = filtered.map(function(obj) {
 		return replaceKeys(obj, /#/g, '');
          });
