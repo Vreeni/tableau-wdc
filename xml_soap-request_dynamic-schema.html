@@ -60,7 +60,21 @@
     	}, Object.create(null));
 	console.log(filtered);
 
-	//loop through the array of objects to remove special characters (just as it was done with the headers)       
+	//loop through the array of objects to remove special characters (just as it was done with the headers)   
+	      var keys = Object.keys(filtered);
+	      console.log(keys);
+	      for (var j=0; j < keys.length; j++) {
+	      	var prop = keys[j];
+		for (i=0; i<prop.length; i++) {
+		   var prop = prop[j].replace(/#/g,'').replace(/:/g,'');
+  		   var tmp = {}; 
+		   tmp[key] = filtered[keys[j]];
+		   keys.push(tmp[key]);
+		 }
+	      }   
+	      console.log(keys);
+	      
+	      
 	filtered = filtered.map(function(obj) {
 		return replaceKeys(obj, /#/g, '');
          });
@@ -79,17 +93,9 @@
   };
   tableau.registerConnector(myConnector);
 
-	/*
-	 var keys = Object.keys(filtered);
-	      console.log(keys);
-	      for (var j=0; j < keys.length; j++) {
-		   var key = keys[j].replace(/#/g,'').replace(/:/g,'');
-  			var tmp = {}; 
-			tmp[key] = filtered[keys[j]];
-		         keys.push(tmp[key]);
+	
 
-	      }
-	*/
+/*	
 //function to replace special characters in object keys within the array of table row data	
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
@@ -97,15 +103,15 @@ function replaceKeys(obj, find, replace) {
 	return Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {}
     }); 
 }
-	
+*/	
 	
  
-/*
+
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
     (acc, key) => Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {});
 }
-*/
+
   		
 	
  //retrieve the xml data either from a user entered url or as input as a pasted file - CURRENTLY: default URL to testfile as datasource 	
