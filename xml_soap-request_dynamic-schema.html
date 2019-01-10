@@ -60,26 +60,13 @@
     	}, Object.create(null));
 	console.log(filtered);
 
-	//loop through the array of objects to remove special characters (just as it was done with the headers)  
-	var arrayOfKeys = Object.keys(filtered);
-	for (i = 0; i < arrayOfKeys.length; i++){
-		//remove special characters in headers    
-		var newKey= arrayOfKeys[i].replace(/#/g,'').replace(/:/g,'');
-		console.log(newKey);
-    		var mem = filtered[arrayOfKeys[i]];
-    		delete filtered[arrayOfKeys[i]];
-    		filtered[newKey] = mem;
-		console.log(filtered[newKey]);
- 	}
-		
-	/*      
+	//loop through the array of objects to remove special characters (just as it was done with the headers)       
 	filtered = filtered.map(function(obj) {
 		return replaceKeys(obj, /#/g, '');
          });
         filtered = filtered.map(function(obj) {
                 return replaceKeys(obj, /:/g, '');
         });
-	*/
 	// WDC doesnt work in Tableau Desktop when using arrow functions 
 	//filtered = filtered.map(obj => replaceKeys(obj, /#/g, ''));
 	//filtered = filtered.map(obj => replaceKeys(obj, /:/g, ''));
@@ -106,19 +93,21 @@
 //function to replace special characters in object keys within the array of table row data	
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
-    function(acc, key) {	  
-	return Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {}
+    function(acc, key) {
+	var newkey = key.replace(find, replace);
+	var newObj = { key.replace(find,replace): obj[key]}
+	return Object.assign(acc, newObj), {}
     }); 
 }
 	
 	
  
-
+/*
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
     (acc, key) => Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {});
 }
-
+*/
   		
 	
  //retrieve the xml data either from a user entered url or as input as a pasted file - CURRENTLY: default URL to testfile as datasource 	
