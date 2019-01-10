@@ -68,11 +68,12 @@
 		for (i=0; i<prop.length; i++) {
 		   var prop = prop[j].replace(/#/g,'').replace(/:/g,'');
   		   var tmp = {}; 
-		   tmp[key] = filtered[keys[j]];
-		   keys.push(tmp[key]);
+		   tmp[prop] = filtered[keys[j]];
+		   keys.push(tmp[prop]);
 		 }
 	      }   
 	      console.log(keys);
+	      console.log(filtered);
 	      
 	      
 	filtered = filtered.map(function(obj) {
