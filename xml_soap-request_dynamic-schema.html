@@ -61,6 +61,9 @@
 	console.log(filtered);
 
 	//loop through the array of objects to remove special characters (just as it was done with the headers)         	      
+	var keys = Object.keys(filtered);
+	console.log(keys);
+	      
 	filtered = filtered.map(function(obj) {
 		return replaceKeys(obj, /#/g, '');
          });
@@ -81,7 +84,7 @@
 
 	
 
-	
+/*	
 //function to replace special characters in object keys within the array of table row data	
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
@@ -89,16 +92,16 @@ function replaceKeys(obj, find, replace) {
 	return Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {}
     }); 
 }
-	
+*/	
 	
  
 
-/*
+
 function replaceKeys(obj, find, replace) {
   return Object.keys(obj).reduce (
     (acc, key) => Object.assign(acc, { [key.replace(find, replace)]: obj[key] }), {});
 }
-*/
+
 
   		
 	
