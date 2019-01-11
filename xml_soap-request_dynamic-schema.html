@@ -72,8 +72,7 @@
 		    var cleankey2 = cleankey1.replace(/:/g,'');
 		    console.log(cleankey2);
 		    if (key !== cleankey2) {
-    			Object.defineProperty(obj, cleankey2,
-        		Object.getOwnPropertyDescriptor(obj, key));
+    			Object.defineProperty(obj, cleankey2, Object.getOwnPropertyDescriptor(obj, key));
     			delete obj[key];
 		    }
 		 console.log(obj[cleankey2]);
