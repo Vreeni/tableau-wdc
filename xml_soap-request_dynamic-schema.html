@@ -71,7 +71,9 @@
 		for (var key in obj) {	
 		    console.log(key);
 		    var newkey = key.replace(/#/g,'').replace(/:/g,'');
+		    console.log(newkey);
 		    newobj = obj[newkey];
+			console.log(newobj);
 		}
 	        filtered2.push(newobj);			
 	}
