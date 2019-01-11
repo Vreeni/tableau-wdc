@@ -70,10 +70,11 @@
 		var newobj = {};
 		for (var key in obj) {	
 		    console.log(key);
-		    var newkey = key.replace(/#/g,'');
-		    console.log(newkey);
-		    newobj = obj[newkey];
-			console.log(newobj);
+		    var cleankey1 = key.replace(/#/g,'');
+		    var cleankey2 = cleankey1.replace(/:/g,'');
+		    console.log(cleankey2);
+		    newobj = obj[cleankey2];
+		    console.log(newobj);
 		}
 	        filtered2.push(newobj);			
 	}
