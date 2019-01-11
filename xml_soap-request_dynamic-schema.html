@@ -70,7 +70,7 @@
 		var newobj = {};
 		for (var key in obj) {	
 		    console.log(key);
-		    var newkey = key.replace(/#/g,'').replace(/:/g,'');
+		    var newkey = key.replace(/#/g,'');
 		    console.log(newkey);
 		    newobj = obj[newkey];
 			console.log(newobj);
