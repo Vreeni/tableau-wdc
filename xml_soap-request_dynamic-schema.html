@@ -61,22 +61,24 @@
 	console.log(filtered);
 
 	//loop through the array of objects to remove special characters (just as it was done with the headers)         	      
-	var keys = Object.keys(filtered);
-	console.log(keys);
 	var filtered2 = [];
 	for (i = 0; i<filtered.length; i ++ ) {
 		console.log(filtered[i]);
 		var obj  = filtered[i];
 		var newobj = {};
 		for (var key in obj) {	
-		    console.log(key);
+		    console.log(k);
 		    var cleankey1 = key.replace(/#/g,'');
 		    var cleankey2 = cleankey1.replace(/:/g,'');
 		    console.log(cleankey2);
-		    newobj = obj[cleankey2];
-		    console.log(obj[key]);
+		    if (key !== cleankey2) {
+    			Object.defineProperty(obj, cleankey2,
+        		Object.getOwnPropertyDescriptor(obj, key));
+    			delete obj[key];
+		    }
+		 console.log(obj[cleankey2]);
 		}
-	        filtered2.push(newobj);			
+	        filtered2.push(obj);			
 	}
 	console.log(filtered2);
 	      
