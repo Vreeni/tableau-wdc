@@ -67,15 +67,15 @@
 	for (i = 0; i<filtered.length; i ++ ) {
 		console.log(filtered[i]);
 		var obj  = filtered[i];
+		var newobj = {};
 		for (var key in obj) {	
 		    console.log(key);
 		    var newkey = key.replace(/#/g,'').replace(/:/g,'');
-		    var newobj = obj[newkey];
-		    filtered2.push(newobj);
+		    newobj = obj[newkey];
 		}
-			
+	        filtered2.push(newobj);			
 	}
-	      console.log(filtered2);
+	console.log(filtered2);
 	      
 	filtered = filtered.map(function(obj) {
 		return replaceKeys(obj, /#/g, '');
